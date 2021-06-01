@@ -30,7 +30,7 @@ How to 'create' a x86 Terminal: https://osxdaily.com/2020/11/18/how-run-homebrew
     * `mkdir ~/build_ios_proxy/install_folder`
 
 9. Create `PKG_CONFIG_PATH` with the installation folder
-    * `export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig`
+    * `export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"`
 
 10. Download the projects
     * `curl -L https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -o openssl.zip`
@@ -74,7 +74,7 @@ How to 'create' a x86 Terminal: https://osxdaily.com/2020/11/18/how-run-homebrew
     * `cd ~/build_ios_proxy/libimobiledevice-1.3.0/`
 
 19. Build library
-    * `./autogen.sh --without-cython`
+    * `./autogen.sh --without-cython --prefix=$HOME/build_ios_proxy/install_folder`
     * `make install -j4`
 
 20. Go to **pcre** folder
