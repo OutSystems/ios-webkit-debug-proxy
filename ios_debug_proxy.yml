@@ -76,7 +76,6 @@ stages:
                     unzip ios-webkit-debug-proxy.zip
                     unzip pcre.zip
                     ls -l
-                    ls -l *liblist*
           - task: CmdLine@2 
             displayName: 'File verification'
             inputs:
@@ -88,6 +87,7 @@ stages:
             inputs:
                 script: |
                     cd ~/build_ios_proxy/libplist-2.2.0/
+                    pwd
                     ./autogen.sh --without-cython --prefix=$HOME/build_ios_proxy/install_folder
                     make install -j4
           - task: CmdLine@2 
