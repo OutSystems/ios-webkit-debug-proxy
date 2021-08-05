@@ -75,6 +75,12 @@ stages:
                     unzip ios-webkit-debug-proxy.zip
                     unzip pcre.zip
           - task: CmdLine@2 
+            displayName: 'File verification'
+            inputs:
+                script: |
+                    cd ~/build_ios_proxy
+                    find . -name "libplist-2.2.0" | xargs ls -l
+          - task: CmdLine@2 
             displayName: 'liblist build'
             inputs:
                 script: |
