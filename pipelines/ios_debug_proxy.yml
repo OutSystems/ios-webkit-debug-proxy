@@ -78,4 +78,7 @@ stages:
             displayName: 'Verify'
             inputs:
                 script: |
-                    ls -lrtd 
+                    cd ~
+                    pwd
+                    ls -lRd
+                    find . -type d 
