@@ -35,23 +35,23 @@ stages:
             inputs:
                 script: |
                     echo "job 1 - task 1" 
-        - task: CmdLine@2 
-        displayName: 'Task 2'
-        inputs:
-          script: |
-            echo "job 1 - task 2"            
+          - task: CmdLine@2 
+            displayName: 'Task 2'
+            inputs:
+                script: |
+                    echo "job 1 - task 2"            
     - job: Job2
       displayName: 'Job2'
       pool:
         vmImage: 'ubuntu-20.04'
       steps:
-        - task: CmdLine@2 
-        displayName: 'Task 1'
-        inputs:
-          script: |
-            echo "job 2 - task 1" 
-        - task: CmdLine@2 
-        displayName: 'Task 2'
-        inputs:
-          script: |
-            echo "job 2 - task 2"       
+          - task: CmdLine@2 
+            displayName: 'Task 1'
+            inputs:
+                script: |
+                    echo "job 2 - task 1" 
+          - task: CmdLine@2 
+            displayName: 'Task 2'
+            inputs:
+                script: |
+                    echo "job 2 - task 2"       
