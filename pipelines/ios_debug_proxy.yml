@@ -30,12 +30,12 @@ stages:
       pool:
         vmImage: 'ubuntu-20.04'
       steps:
-      - task: CmdLine@2 
+        - task: CmdLine@2 
         displayName: 'Task 1'
         inputs:
           script: |
             echo "job 1 - task 1" 
-       - task: CmdLine@2 
+        - task: CmdLine@2 
         displayName: 'Task 2'
         inputs:
           script: |
@@ -45,12 +45,12 @@ stages:
       pool:
         vmImage: 'ubuntu-20.04'
       steps:
-      - task: CmdLine@2 
+        - task: CmdLine@2 
         displayName: 'Task 1'
         inputs:
           script: |
             echo "job 2 - task 1" 
-       - task: CmdLine@2 
+        - task: CmdLine@2 
         displayName: 'Task 2'
         inputs:
           script: |
