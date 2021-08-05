@@ -75,7 +75,7 @@ stages:
                     unzip libimobiledevice.zip
                     unzip ios-webkit-debug-proxy.zip
                     unzip pcre.zip
-                    find . -type d | grep liblist
+                    ls -l
           - task: CmdLine@2 
             displayName: 'File verification'
             inputs:
