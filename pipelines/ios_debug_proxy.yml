@@ -64,7 +64,7 @@ stages:
                     curl -L https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -o libimobiledevice.zip
                     curl -L https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -o ios-webkit-debug-proxy.zip
                     curl -L https://ftp.pcre.org/pub/pcre/pcre-8.43.zip -o pcre.zip
-           - task: CmdLine@2 
+          - task: CmdLine@2 
             displayName: 'Extract projects'
             inputs:
                 script: |
