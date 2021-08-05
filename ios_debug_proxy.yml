@@ -81,6 +81,7 @@ stages:
             inputs:
                 script: |
                     cd ~/build_ios_proxy
+                    ls -l
                     find . -name "libplist" | xargs ls -l
           - task: CmdLine@2 
             displayName: 'liblist build'
