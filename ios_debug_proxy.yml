@@ -75,12 +75,15 @@ stages:
                     unzip libimobiledevice.zip
                     unzip ios-webkit-debug-proxy.zip
                     unzip pcre.zip
+                    pwd
                     ls -l
           - task: CmdLine@2 
             displayName: 'File verification'
             inputs:
                 script: |
+                    pwd
                     cd ~/build_ios_proxy
+                    pwd
                     ls -l
                     find . -name "libplist" | xargs ls -l
           - task: CmdLine@2 
