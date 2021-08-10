@@ -141,5 +141,5 @@ stages:
                     export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
                     cd ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/
                     pwd
-                    diff --git a/src/ios_webkit_debug_proxy_main.c b/src/ios_webkit_debug_proxy_main.c
-                    diff --git a/src/socket_manager.c b/src/socket_manager.c
+                    git diff a/src/ios_webkit_debug_proxy_main.c b/src/ios_webkit_debug_proxy_main.c
+#                    diff --git a/src/socket_manager.c b/src/socket_manager.c
