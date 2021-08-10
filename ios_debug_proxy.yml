@@ -103,21 +103,16 @@ stages:
             displayName: 'libusbmuxd build'
             inputs:
                 script: |
-                    echo "1#################"
-                    find ~/build_ios_proxy/ -name "libplist*"
-                    echo "2#################"
                     export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
-                    echo $PKG_CONFIG_PATH 
-                    echo "3#################"
+                    echo $PKG_CONFIG_PATH
                     cd ~/build_ios_proxy/libusbmuxd-2.0.2/
-                    echo "4#################"
-                    pwd
                     ./autogen.sh --prefix=$HOME/build_ios_proxy/install_folder
                     make install -j4
           - task: CmdLine@2 
             displayName: 'openssl build'
             inputs:
                 script: |
+                    export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
                     cd ~/build_ios_proxy/openssl-OpenSSL_1_1_1
                     ./config --prefix=$HOME/build_ios_proxy/install_folder no-idea no-mdc2 no-rc5 shared
                     make -j4
