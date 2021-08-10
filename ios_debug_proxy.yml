@@ -113,7 +113,7 @@ stages:
             inputs:
                 script: |
                     export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
-                    SYSTEM=`uname -s` ./config
+                    unset SYSTEM
                     cd ~/build_ios_proxy/openssl-OpenSSL_1_1_1
                     ./config --prefix=$HOME/build_ios_proxy/install_folder no-idea no-mdc2 no-rc5 shared
                     make -j4
