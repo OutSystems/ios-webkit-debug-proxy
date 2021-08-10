@@ -100,9 +100,13 @@ stages:
             displayName: 'libusbmuxd build'
             inputs:
                 script: |
+                    echo "1#################"
                     find ~/build_ios_proxy/ -name "libplist*"
+                    echo "2#################"
                     echo $PKG_CONFIG_PATH 
+                    echo "3#################"
                     cd ~/build_ios_proxy/libusbmuxd-2.0.2/
+                    echo "4#################"
                     pwd
                     ./autogen.sh --prefix=$HOME/build_ios_proxy/install_folder
                     make install -j4
