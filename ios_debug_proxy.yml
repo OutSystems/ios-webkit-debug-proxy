@@ -101,6 +101,7 @@ stages:
             inputs:
                 script: |
                     find ~/build_ios_proxy/ -name "libplist*"
+                    echo $PKG_CONFIG_PATH 
                     cd ~/build_ios_proxy/libusbmuxd-2.0.2/
                     pwd
                     ./autogen.sh --prefix=$HOME/build_ios_proxy/install_folder
