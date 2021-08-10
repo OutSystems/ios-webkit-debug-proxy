@@ -162,6 +162,7 @@ stages:
             displayName: 'Change binary files'
             inputs:
                 script: |
+                    cd ~/build_ios_proxy/bundle
                     install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libimobiledevice-1.0.6.dylib @executable_path/libimobiledevice-1.0.6.dylib ios_webkit_debug_proxy
                     install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libusbmuxd-2.0.6.dylib @executable_path/libusbmuxd-2.0.6.dylib ios_webkit_debug_proxy
                     install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib @executable_path/libplist-2.0.3.dylib ios_webkit_debug_proxy
