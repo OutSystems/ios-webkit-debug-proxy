@@ -106,6 +106,7 @@ stages:
                     echo "1#################"
                     find ~/build_ios_proxy/ -name "libplist*"
                     echo "2#################"
+                    export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
                     echo $PKG_CONFIG_PATH 
                     echo "3#################"
                     cd ~/build_ios_proxy/libusbmuxd-2.0.2/
