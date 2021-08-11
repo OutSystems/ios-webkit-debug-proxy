@@ -195,5 +195,5 @@ stages:
           - task: PublishPipelineArtifact@1
             displayName: 'Publish libs'
             inputs:
-              targetPath: file.tar
+              targetPath: ~/file.tar
               artifactName: 'Libraries'                                                                                                      
