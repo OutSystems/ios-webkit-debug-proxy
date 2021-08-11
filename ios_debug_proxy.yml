@@ -178,4 +178,9 @@ stages:
             displayName: 'Find files'
             inputs:
                 script: |
-                    find ~ -name "*dylib"                                                                                                      
+                    find ~ -name "libcrypto.1.1.dylib"
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish Performance Test Results'
+            inputs:
+              targetPath: 
+              artifactName: 'Performance Tests'                                                                                                      
