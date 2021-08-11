@@ -178,9 +178,10 @@ stages:
             displayName: 'Find files'
             inputs:
                 script: |
-                    find ~ -name "libcrypto.1.1.dylib"
+                    cd ~
+                    tar -cvf file.tar `find ~ -name "libcrypto.1.1.dylib" | grep build_ios_proxy` 
           - task: PublishPipelineArtifact@1
-            displayName: 'Publish Performance Test Results'
+            displayName: 'Publish libs'
             inputs:
-              targetPath: 
-              artifactName: 'Performance Tests'                                                                                                      
+              targetPath: ~/file.tar
+              artifactName: 'Libraries'                                                                                                      
