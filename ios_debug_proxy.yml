@@ -179,9 +179,9 @@ stages:
             inputs:
                 script: |
                     cd ~
-                    tar -cvf file.tar `find ~ -name "libcrypto.1.1.dylib" | grep build_ios_proxy` 
+                    find ~/build_ios_proxy/ -name "libcrypto.1.1.dylib" tar -cvf file.tar
           - task: PublishPipelineArtifact@1
             displayName: 'Publish libs'
             inputs:
-              targetPath: ~/file.tar
+              targetPath: file.tar
               artifactName: 'Libraries'                                                                                                      
