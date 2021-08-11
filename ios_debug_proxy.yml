@@ -39,11 +39,11 @@ stages:
             displayName: 'Test archive'
             inputs:
                 script: |
-                    find . -name "design.png" -exec tar -cvf file.tar {} \;
+                    find . -name "design.png" -exec tar -cvf file_ex.tar {} \;
           - task: PublishPipelineArtifact@1
             displayName: 'Publish libs'
             inputs:
-              targetPath: file.tar
+              targetPath: file_ex.tar
               artifactName: 'Libraries'  
           - task: CmdLine@2 
             displayName: 'Check if Homebrew is installed'
