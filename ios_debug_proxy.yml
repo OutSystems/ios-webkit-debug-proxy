@@ -181,7 +181,7 @@ stages:
                     tar -cvf ~/file.tar ~/build_ios_proxy/bundle
                     pwd
                     ls -l
-                    find $(pwd) -name "file*tar" 
+                    find $(pwd) -name "ios_debug_proxy*tar" 
           - task: PublishPipelineArtifact@1
             displayName: 'Publish libs'
             inputs:
