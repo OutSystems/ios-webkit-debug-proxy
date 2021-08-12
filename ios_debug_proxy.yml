@@ -179,11 +179,14 @@ stages:
             inputs:
                 script: |
                     tar -cvf ~/file.tar ~/build_ios_proxy/bundle
+                    tar -cvf ~/file1.tar ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/src/ios_webkit_debug_proxy
                     pwd
                     ls -l
-                    find $(pwd) -name "ios_debug_proxy*tar" 
+                    find $(pwd) -name "ios_debug_proxy*" 
           - task: PublishPipelineArtifact@1
             displayName: 'Publish libs'
             inputs:
               targetPath: /Users/runner/file.tar
-              artifactName: 'Libraries'                                                                                                      
+              artifactName: 'Libraries' 
+              targetPath: /Users/runner/file1.tar
+              artifactName: 'Binaries'                                                                                                     
