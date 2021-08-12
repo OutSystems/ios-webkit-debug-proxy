@@ -178,8 +178,7 @@ stages:
             displayName: 'Find and archive files'
             inputs:
                 script: |
-                    cd ~
-                    find ~/build_ios_proxy/ -name "libcrypto.1.1.dylib" -exec tar -cvf ~/file.tar {} \;
+                     tar -cvf ~/build_ios_proxy/bundle ~/file.tar 
                     pwd
                     ls -l
                     find $(pwd) -name "file*tar" 
