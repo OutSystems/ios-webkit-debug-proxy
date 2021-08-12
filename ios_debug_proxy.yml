@@ -146,6 +146,9 @@ stages:
             inputs:
                 script: |
                     mkdir ~/build_ios_proxy/bundle
+                    cd ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/src/ios_webkit_debug_proxy
+                    pwd
+                    ls -l
                     cd ~/build_ios_proxy/bundle
           - task: CmdLine@2 
             displayName: 'Copy ios_webkit_debug_proxy'
@@ -186,5 +189,5 @@ stages:
           - task: PublishPipelineArtifact@1
             displayName: 'Publish libs'
             inputs:
-              targetPath: /Users/runner/file.tar /Users/runner/file1.tar
-              artifactName: 'Libraries'                                                                                                  
+              targetPath: /Users/runner/file.tar
+              artifactName: 'Libraries'                                                                                                      
