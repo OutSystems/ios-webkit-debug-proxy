@@ -39,6 +39,7 @@ stages:
             displayName: 'Test archive'
             inputs:
                 script: |
+                    pwd
                     find . -name "design.png" -exec tar -cvf file_ex.tar {} \;
           - task: PublishPipelineArtifact@1
             displayName: 'Publish libs'
@@ -190,6 +191,7 @@ stages:
                 script: |
                     cd ~
                     find ~/build_ios_proxy/ -name "libcrypto.1.1.dylib" -exec tar -cvf file.tar {} \;
+                    pwd
                     ls -l
                     find . -name "file*tar"
           - task: PublishPipelineArtifact@1
