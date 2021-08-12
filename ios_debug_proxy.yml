@@ -34,7 +34,12 @@ stages:
             displayName: 'Check Correct architecture'
             inputs:
                 script: |
-                    arch 
+                    arch
+                    pwd
+                    cd 
+                    pwd
+                    cd ~
+                    pwd 
           - task: CmdLine@2 
             displayName: 'Test archive'
             inputs:
