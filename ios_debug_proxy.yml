@@ -140,15 +140,17 @@ stages:
                 script: |
                     export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
                     cd ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/
+                    pwd
+                    ls -l
                     ./autogen.sh --prefix=$HOME/build_ios_proxy/install_folder
           - task: CmdLine@2 
             displayName: 'Directory for necessary change'
             inputs:
                 script: |
                     mkdir ~/build_ios_proxy/bundle
-                    cd ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/src/ios_webkit_debug_proxy
+                    cd ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/
                     pwd
-                    ls -l
+                    ls -lR
                     cd ~/build_ios_proxy/bundle
           - task: CmdLine@2 
             displayName: 'Copy ios_webkit_debug_proxy'
