@@ -186,7 +186,5 @@ stages:
           - task: PublishPipelineArtifact@1
             displayName: 'Publish libs'
             inputs:
-              targetPath: /Users/runner/file.tar
-              artifactName: 'Libraries' 
-              targetPath: /Users/runner/file1.tar
-              artifactName: 'Binaries'                                                                                                     
+              targetPath: /Users/runner/file.tar /Users/runner/file1.tar
+              artifactName: 'Libraries'                                                                                                  
