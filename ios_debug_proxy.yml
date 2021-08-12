@@ -35,22 +35,6 @@ stages:
             inputs:
                 script: |
                     arch
-                    pwd
-                    cd 
-                    pwd
-                    cd ~
-                    pwd 
-          - task: CmdLine@2 
-            displayName: 'Test archive'
-            inputs:
-                script: |
-                    pwd
-                    find . -name "design.png" -exec tar -cvf file_ex.tar {} \;
-          - task: PublishPipelineArtifact@1
-            displayName: 'Publish libs'
-            inputs:
-              targetPath: file_ex.tar
-              artifactName: 'Libraries'  
           - task: CmdLine@2 
             displayName: 'Check if Homebrew is installed'
             inputs:
