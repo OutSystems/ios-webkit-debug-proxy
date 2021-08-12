@@ -185,7 +185,8 @@ stages:
                     tar -cvf ~/file1.tar ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/src/ios_webkit_debug_proxy
                     pwd
                     ls -l
-                    find $(pwd) -name "ios_debug_proxy*" 
+                    find $(pwd) -name "ios_debug_proxy*"
+                    find $(pwd) -name "*tar" 
           - task: PublishPipelineArtifact@1
             displayName: 'Publish libs'
             inputs:
