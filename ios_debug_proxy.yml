@@ -178,7 +178,7 @@ stages:
             displayName: 'Find and archive files'
             inputs:
                 script: |
-                     tar -cvf ~/build_ios_proxy/bundle ~/file.tar 
+                    tar -cvf ~/build_ios_proxy/bundle ~/file.tar 
                     pwd
                     ls -l
                     find $(pwd) -name "file*tar" 
