@@ -143,6 +143,7 @@ stages:
                     pwd
                     ls -l
                     ./autogen.sh --prefix=$HOME/build_ios_proxy/install_folder
+                    make -j4
           - task: CmdLine@2 
             displayName: 'Directory for necessary change'
             inputs:
