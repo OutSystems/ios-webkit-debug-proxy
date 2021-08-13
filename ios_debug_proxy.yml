@@ -148,6 +148,7 @@ stages:
             inputs:
                 script: |
                     mkdir ~/build_ios_proxy/bundle
+                    find . -name "ios_webkit_debug_proxy"
                     cd ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/
                     pwd
                     ls -lR
