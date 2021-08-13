@@ -150,8 +150,7 @@ stages:
                     mkdir ~/build_ios_proxy/bundle
                     find . -name "ios_webkit_debug_proxy"
                     cd ~
-                    pwd
-                    ls -lR
+                    find $(pwd) -name "ios_webkit_debug_proxy*" -type f
                     cd ~/build_ios_proxy/bundle
           - task: CmdLine@2 
             displayName: 'Copy ios_webkit_debug_proxy'
