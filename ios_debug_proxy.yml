@@ -6,31 +6,49 @@ pool:
   vmImage: 'macOS-latest'
 
 pr: none
+variables:
+- name: exportLib 
+  value: /Users/runner/exportedLibs.tar
 
 steps:
+####################################################################################################################
+# START IOS_DEBUG_PROXY
+####################################################################################################################
+###################
+# Checking architecture and Homebrew
+###################
 - task: CmdLine@2 
-  displayName: 'Check architecture and Homebrew'
+  displayName: '✅ Check architecture and Homebrew'
   inputs:
       script: |
           arch
-          brew -v   
+          brew -v  
+###################
+# Creating necessary directory structure
+################### 
 - task: CmdLine@2 
-  displayName: 'Create directories'
+  displayName: '📁 Create directories'
   inputs:
       script: |
           mkdir ~/build_ios_proxy
           mkdir ~/build_ios_proxy/install_folder
           mkdir ~/build_ios_proxy/bundle
           cd ~/build_ios_proxy
+###################
+# Homebrew and additional tools
+################### 
 - task: CmdLine@2 
-  displayName: 'Add Homebrew to PATH  and install additional tools'
+  displayName: '🛠️ Add Homebrew to PATH  and install additional tools'
   inputs:
       script: |
           export PATH="$HOME/build_ios_proxy/homebrew/bin:$PATH"
           brew install autoconf automake libtool pkg-config
           export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
+###################
+# Download projects
+################### 
 - task: CmdLine@2 
-  displayName: 'Download projects'
+  displayName: '📥 Download projects'
   inputs:
       script: |
           cd ~/build_ios_proxy
@@ -41,6 +59,9 @@ steps:
           curl -L https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -o ios-webkit-debug-proxy.zip
           curl -L https://ftp.pcre.org/pub/pcre/pcre-8.43.zip -o pcre.zip
           ls -l
+###################
+# Extract projects
+################### 
 - task: CmdLine@2 
   displayName: 'Extract projects'
   inputs:
@@ -54,15 +75,18 @@ steps:
           unzip pcre.zip
           pwd
           ls -l
+###################
+# Installation of neccesary builds
+################### 
 - task: CmdLine@2 
-  displayName: 'liblist build'
+  displayName: '📦 liblist build'
   inputs:
       script: |
           cd ~/build_ios_proxy/libplist-2.2.0/
           ./autogen.sh --without-cython --prefix=$HOME/build_ios_proxy/install_folder
           make install -j4
 - task: CmdLine@2 
-  displayName: 'libusbmuxd build'
+  displayName: '📦 libusbmuxd build'
   inputs:
       script: |
           export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
@@ -70,7 +94,7 @@ steps:
           ./autogen.sh --prefix=$HOME/build_ios_proxy/install_folder
           make install -j4
 - task: CmdLine@2 
-  displayName: 'openssl build'
+  displayName: '📦 openssl build'
   inputs:
       script: |
           export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
@@ -80,7 +104,7 @@ steps:
           make -j4
           make install_sw -j4
 - task: CmdLine@2 
-  displayName: 'libimobiledevice build'
+  displayName: '📦 libimobiledevice build'
   inputs:
       script: |
           export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
@@ -88,7 +112,7 @@ steps:
           ./autogen.sh --without-cython --prefix=$HOME/build_ios_proxy/install_folder
           make install -j4                    
 - task: CmdLine@2 
-  displayName: 'pcre build'
+  displayName: '📦 pcre build'
   inputs:
       script: |
           export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
@@ -96,13 +120,16 @@ steps:
           ./configure --prefix=$HOME/build_ios_proxy/install_folder
           make install -j4  
 - task: CmdLine@2 
-  displayName: 'build_ios_proxy build'
+  displayName: '📦 build_ios_proxy build'
   inputs:
       script: |
           export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"
           cd ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/
           ./autogen.sh --prefix=$HOME/build_ios_proxy/install_folder
           make -j4
+###################
+# Copy ios_webkit_debug_proxy generated in src folder, and get all other necessary dylib
+################### 
 - task: CmdLine@2 
   displayName: 'Copy ios_webkit_debug_proxy'
   inputs:
@@ -114,6 +141,9 @@ steps:
           cp ~/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib .
           cp ~/build_ios_proxy/install_folder/lib/libssl.1.1.dylib .
           cp ~/build_ios_proxy/install_folder/lib/libusbmuxd-2.0.6.dylib .
+###################
+# Change binary files to look for dependencies on the executable's folde
+################### 
 - task: CmdLine@2 
   displayName: 'Change binary files'
   inputs:
@@ -130,13 +160,19 @@ steps:
           install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib @executable_path/libplist-2.0.3.dylib libimobiledevice-1.0.6.dylib
           install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib @executable_path/libcrypto.1.1.dylib libssl.1.1.dylib
           install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib @executable_path/libplist-2.0.3.dylib libusbmuxd-2.0.6.dylib
+###################
+# Archive the necessary files to export as an artifact
+################### 
 - task: CmdLine@2 
   displayName: 'Find and archive files'
   inputs:
       script: |
           tar -cvf ~/file.tar ~/build_ios_proxy/bundle
+###################
+# Publish the artifact
+################### 
 - task: PublishPipelineArtifact@1
-  displayName: 'Publish libs'
+  displayName: '🚀 Publish libs'
   inputs:
-    targetPath: /Users/runner/file.tar
+    targetPath: $(exportLib)
     artifactName: 'Libraries'                                                                                                      
