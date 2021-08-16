@@ -172,7 +172,7 @@ steps:
 # Publish the artifact
 ################### 
 - task: PublishPipelineArtifact@1
-  displayName: '🚀 Publish libs'
+  displayName: '🍻 Publish libs'
   inputs:
     targetPath: $(exportLib)
     artifactName: 'Libraries'                                                                                                      
