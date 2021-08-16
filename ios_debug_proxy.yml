@@ -7,11 +7,6 @@ pool:
 
 pr: none
 
-stages:
-#########################################################################
-## Stage One
-#########################################################################
-
 steps:
 - task: CmdLine@2 
   displayName: 'Check architecture and Homebrew'
