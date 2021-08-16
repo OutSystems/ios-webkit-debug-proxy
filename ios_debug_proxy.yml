@@ -158,7 +158,7 @@ stages:
             inputs:
                 script: |
                     cd ~/build_ios_proxy/bundle 
-                    cp ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/src/ios_webkit_debug_proxy* .
+                    cp ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/src/ios_webkit_debug_proxy .
                     cp ~/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib .
                     cp ~/build_ios_proxy/install_folder/lib/libimobiledevice-1.0.6.dylib .
                     cp ~/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib .
