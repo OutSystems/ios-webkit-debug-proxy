@@ -167,7 +167,7 @@ steps:
   displayName: 'Find and archive files'
   inputs:
       script: |
-          tar -cvf ~/file.tar ~/build_ios_proxy/bundle
+          tar -cvf $(exportLib) ~/build_ios_proxy/bundle
 ###################
 # Publish the artifact
 ################### 
