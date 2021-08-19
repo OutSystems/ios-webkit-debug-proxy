@@ -7,7 +7,7 @@ pool:
 
 pr: none
 variables:
-- name: exportLib 
+- name: MAC_exportLib 
   value: /Users/runner/exportedLibs.tar
 
 steps:
@@ -175,5 +175,5 @@ steps:
 - task: PublishPipelineArtifact@1
   displayName: '🍻 Publish libs'
   inputs:
-    targetPath: $(exportLib)
+    targetPath: $(MAC_exportLib)
     artifactName: 'Libraries'                                                                                                      
