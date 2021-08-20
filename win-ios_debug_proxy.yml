@@ -14,4 +14,10 @@ strategy:
   matrix:
     mingw-w64-i686-gcc:
       name: '32-bit OpenSSL and MQTT'
+
+- task: CmdLine@2
+  displayName: 'Install msys'
+  inputs:
+    script: |
+      choco install msys2
                                                                                              
