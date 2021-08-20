@@ -13,7 +13,7 @@ steps:
   inputs:
     script: |
       choco install msys2
-- task: CmdLine@2
+- task: PowerShell@2
   displayName: 'Check'
   inputs:
     script: |
