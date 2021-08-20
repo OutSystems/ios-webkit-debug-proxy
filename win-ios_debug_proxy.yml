@@ -20,7 +20,6 @@ steps:
       cd /tools
       pwd
       ls
-      /tools/msys64/usr/bin/bash
 #- task: CmdLine@2
 #  displayName: 'Setup MSYS2'
 #  inputs:
