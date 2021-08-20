@@ -21,8 +21,8 @@ steps:
       ls 
       cd /
       pwd
-      ls 
-      cd ~
+      ls
+      cd C:\Windows\system32
       pwd
       ls
 - task: CmdLine@2
