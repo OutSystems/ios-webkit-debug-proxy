@@ -4,7 +4,6 @@ trigger: none
 
 pool:
   vmImage: 'windows-latest'
-timeoutInMinutes: 180
 steps:
 - script: choco install msys2
   displayName: 'Setup MSYS2'
