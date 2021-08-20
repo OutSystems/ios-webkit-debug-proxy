@@ -10,15 +10,8 @@ variables:
 - name: exportLib 
   value: /Users/runner/exportedLibs.tar
 
-steps:
-####################################################################################################################
-# START IOS_DEBUG_PROXY for win
-####################################################################################################################
-###################
-# Install MSYS2
-###################
-- task: msys2/setup-msys2@v2 
-  displayName: '✅ Installation of MSYS2'
-- task: CmdLine@2
-  displayName: 'pacman -Syu'
+strategy:
+  matrix:
+    msys2_mingw32_debug_openssl:
+      name: '32-bit OpenSSL and MQTT'
                                                                                              
