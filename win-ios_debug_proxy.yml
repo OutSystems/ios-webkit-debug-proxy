@@ -23,8 +23,7 @@ steps:
       pwd
       ls
       cd C:\Windows\system32
-      pwd
-      ls
+      MSYS MinGW 32-bit
 - task: CmdLine@2
   displayName: 'Setup MSYS2'
   inputs:
