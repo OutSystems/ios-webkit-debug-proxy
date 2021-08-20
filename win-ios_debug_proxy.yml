@@ -12,7 +12,7 @@ steps:
   displayName: 'Install MSYS2'
   inputs:
     script: |
-      choco install msys2
+      choco install msys2 --params "/NoUpdate /InstallDir:/tools"
 - task: CmdLine@2
   displayName: 'Check'
   inputs:
