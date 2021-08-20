@@ -20,6 +20,8 @@ steps:
       echo $PATH
       pwd
       ls 
+      cd /d/a/1/s
+      ls 
 - task: CmdLine@2
   displayName: 'Setup MSYS2'
   inputs:
