@@ -18,6 +18,8 @@ steps:
   inputs:
     script: |
       echo $PATH
+      pwd
+      ls 
 - task: CmdLine@2
   displayName: 'Setup MSYS2'
   inputs:
