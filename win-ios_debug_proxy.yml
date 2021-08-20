@@ -12,6 +12,6 @@ variables:
 
 strategy:
   matrix:
-    msys2_mingw32_debug_openssl:
+    mingw-w64-i686-gcc:
       name: '32-bit OpenSSL and MQTT'
                                                                                              
