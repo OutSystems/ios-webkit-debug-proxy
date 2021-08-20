@@ -13,6 +13,11 @@ steps:
   inputs:
     script: |
       choco install msys2
+- task: CmdLine@2
+  displayName: 'Install additional  tools'
+  inputs:
+    script: |
+      pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config
     
 
 
