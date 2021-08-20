@@ -17,7 +17,7 @@ steps:
   displayName: 'Check'
   inputs:
     script: |
-      cd /tools/usr
+      cd /tools/usr/bin
       pwd
       ls
 #- task: CmdLine@2
@@ -36,6 +36,9 @@ steps:
   inputs:
     script: |
       /tools/msys2.exe /pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config
+      /tools/msys2.exe /pacman -S automake-wrapper autoconf make unzip patch
+      wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip
+
     
 
 
