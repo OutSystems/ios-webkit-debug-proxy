@@ -4,9 +4,17 @@ trigger: none
 
 pool:
   vmImage: 'windows-latest'
-steps:
-- script: choco install msys2
+#steps:
+#- script: 
+#    choco install msys2
+#  displayName: 'Setup MSYS2'
+- task: CmdLine@2
   displayName: 'Setup MSYS2'
+  inputs:
+    script: |
+      choco install msys2
+    
+
 
 
 #strategy:
