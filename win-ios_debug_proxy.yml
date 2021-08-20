@@ -17,7 +17,7 @@ steps:
   displayName: 'Check'
   inputs:
     script: |
-      cd /tools
+      cd /tools/usr
       pwd
       ls
 #- task: CmdLine@2
@@ -35,7 +35,7 @@ steps:
   displayName: 'Install additional  tools'
   inputs:
     script: |
-      pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config
+      /tools/msys2.exe /pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config
     
 
 
