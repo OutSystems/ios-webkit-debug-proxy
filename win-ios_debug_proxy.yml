@@ -17,13 +17,9 @@ steps:
   displayName: 'Check'
   inputs:
     script: |
-      pwd
-      ls 
-      cd /
+      cd tools
       pwd
       ls
-      cd C:\Windows\system32
-      MSYS MinGW 32-bit
 - task: CmdLine@2
   displayName: 'Setup MSYS2'
   inputs:
