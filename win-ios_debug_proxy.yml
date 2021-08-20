@@ -9,7 +9,7 @@ steps:
 #    choco install msys2
 #  displayName: 'Setup MSYS2'
 - task: CmdLine@2
-  displayName: 'Setup MSYS2'
+  displayName: 'Install MSYS2'
   inputs:
     script: |
       choco install msys2
@@ -17,7 +17,6 @@ steps:
   displayName: 'Check'
   inputs:
     script: |
-      echo $PATH
       pwd
       ls 
       cd /
