@@ -17,7 +17,7 @@ steps:
   displayName: 'Check'
   inputs:
     script: |
-      cd /tools
+      cd /tools/msys64
       pwd
       ls
       /tools/msys64/usr/bin/bash
