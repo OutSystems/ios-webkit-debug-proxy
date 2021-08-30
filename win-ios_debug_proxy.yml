@@ -10,12 +10,11 @@ steps:
 #  displayName: 'Setup MSYS2'
 - powershell: 
   displayName: 'check'
-  inputs:
-    script: |
-      pwd
-      cd MSYS_install
-      pwd
-      ls
+  script: |
+    pwd
+    cd MSYS_install
+    pwd
+    ls
 - task: PowerShell@2
   displayName: 'Instalation MSYS2'
   inputs:
