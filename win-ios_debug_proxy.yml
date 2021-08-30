@@ -8,18 +8,19 @@ steps:
 #- script: 
 #    choco install msys2
 #  displayName: 'Setup MSYS2'
-- task: CmdLine@2
+- task: PowerShell@2
   displayName: 'Install MSYS2'
   inputs:
     script: |
-      choco install msys2 --params "/NoUpdate /InstallDir:/tools"
-- task: CmdLine@2
-  displayName: 'Check'
-  inputs:
-    script: |
-      cd /tools/usr/bin
-      pwd
-      ls
+      cd .\MSYS_install
+      .\install.ps1
+#- task: CmdLine@2
+#  displayName: 'Check'
+#  inputs:
+#    script: |
+#      cd /tools/usr/bin
+#      pwd
+#      ls
 #- task: CmdLine@2
 #  displayName: 'Setup MSYS2'
 #  inputs:
