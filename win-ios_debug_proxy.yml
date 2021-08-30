@@ -8,6 +8,11 @@ steps:
 #- script: 
 #    choco install msys2
 #  displayName: 'Setup MSYS2'
+- task: CmdLine@2
+  displayName: 'Check cmd line'
+  inputs:
+    script: |
+      ls
 - task: PowerShell@2
   displayName: 'Check'
   inputs:
