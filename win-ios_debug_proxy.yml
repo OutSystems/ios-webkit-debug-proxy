@@ -5,9 +5,6 @@ trigger: none
 pool:
   vmImage: 'windows-latest'
 steps:
-#- script: 
-#    choco install msys2
-#  displayName: 'Setup MSYS2'
 - task: CmdLine@2
   displayName: 'Check cmd line'
   inputs:
@@ -29,31 +26,26 @@ steps:
       pwd
       ls
       .\install.ps1
-#- task: CmdLine@2
-#  displayName: 'Check'
-#  inputs:
-#    script: |
-#      cd /tools/usr/bin
-#      pwd
-#      ls
-#- task: CmdLine@2
-#  displayName: 'Setup MSYS2'
-#  inputs:
-#    script: |
-#      /tools/msys64/usr/bin/bash -c "PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/; bash scripts/azure_windows_x86_64_setup.sh"
-#- task: CmdLine@2
-#  displayName: 'Build'
-#  inputs:
-#    script: |
-#      /tools/msys64/usr/bin/bash -c /
-#      "PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/; export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig; export CONFIG_SITE=/mingw64/etc/config.site; export MSYSTEM=MINGW64; ./autogen.sh --no-configure-run; cd win32/installer_msys2; make all"
-- task: CmdLine@2
+      "PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/; export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig; export CONFIG_SITE=/mingw64/etc/config.site; export MSYSTEM=MINGW64; ./autogen.sh --no-configure-run; cd win32/installer_msys2; make all"
+- task: PowerShell@2
   displayName: 'Install additional  tools'
   inputs:
+    targetType: 'inline'
     script: |
-      /tools/msys2.exe /pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config
-      /tools/msys2.exe /pacman -S automake-wrapper autoconf make unzip patch
-      /tools/msys2.exe /wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip
+      pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config
+      pacman -S automake-wrapper autoconf make unzip patch
+- task: PowerShell@2
+  displayName: 'Download projects'
+  inputs:
+    targetType: 'inline'
+    script: |
+      wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip
+      wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O libplist.zip
+      wget https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -O libusbmuxd.zip
+      wget https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -O libimobiledevice.zip
+      wget https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -O ios-webkit-debug-proxy.zip
+      wget https://ftp.pcre.org/pub/pcre/pcre-8.43.zip -O pcre.zip
+
 
     
 
