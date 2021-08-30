@@ -22,6 +22,7 @@ steps:
 - task: PowerShell@2
   displayName: 'Instalation MSYS2'
   inputs:
+    targetType: 'inline'
     script: |
       pwd
       cd MSYS_install
