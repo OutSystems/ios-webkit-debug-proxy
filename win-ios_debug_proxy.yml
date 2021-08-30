@@ -12,7 +12,10 @@ steps:
   displayName: 'Install MSYS2'
   inputs:
     script: |
+      pwd
       cd .\MSYS_install
+      pwd
+      ls
       .\install.ps1
 #- task: CmdLine@2
 #  displayName: 'Check'
