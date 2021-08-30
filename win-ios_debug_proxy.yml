@@ -13,8 +13,6 @@ steps:
   inputs:
     script: |
       pwd
-      cd MSYS_install
-      pwd
       ls
 - task: PowerShell@2
   displayName: 'Instalation MSYS2'
