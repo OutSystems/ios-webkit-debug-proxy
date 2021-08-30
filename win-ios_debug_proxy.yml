@@ -15,6 +15,7 @@ steps:
       ls
 - task: PowerShell@2
   displayName: 'Check'
+  targetType: 'inline'
   inputs:
     script: |
       ls
