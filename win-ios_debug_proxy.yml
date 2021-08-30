@@ -12,7 +12,6 @@ steps:
   displayName: 'Check'
   inputs:
     script: |
-      pwd
       ls
 - task: PowerShell@2
   displayName: 'Instalation MSYS2'
