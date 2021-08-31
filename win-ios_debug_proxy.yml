@@ -48,12 +48,12 @@ steps:
       cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -Syu'
 #      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'      
 #      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S automake-wrapper autoconf make unzip patch'
-- task: PowerShell@2
-  displayName: 'Install additional  tools 2'
-  inputs:
-    targetType: 'inline'
-    script: |
-      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S automake-wrapper autoconf make unzip patch'
+#- task: PowerShell@2
+#  displayName: 'Install additional  tools 2'
+#  inputs:
+#    targetType: 'inline'
+#    script: |
+#      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S automake-wrapper autoconf make unzip patch'
 - task: PowerShell@2
   displayName: 'Download projects'
   inputs:
@@ -65,4 +65,17 @@ steps:
 #      wget https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -O libimobiledevice.zip
 #      wget https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -O ios-webkit-debug-proxy.zip
 #      wget https://ftp.pcre.org/pub/pcre/pcre-8.43.zip -O pcre.zip
-#                                                                                          
+- task: PowerShell@2
+  displayName: 'Unzip'
+  inputs:
+    targetType: 'inline'
+    script: |
+      unzip libplist.zip
+- task: PowerShell@2
+  displayName: 'Install additional  tools 2'
+  inputs:
+    targetType: 'inline'
+    script: |
+      cd /home/libplist-2.2.0/
+      ./autogen.sh --without-cython
+      make install -j4                                                                                                     
