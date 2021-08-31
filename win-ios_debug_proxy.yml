@@ -4,6 +4,11 @@ trigger: none
 
 pool:
   vmImage: 'windows-latest'
+
+variables:
+- name: CMD 
+  value: cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c ZZZ
+  
 steps:
 - task: CmdLine@2
   displayName: 'Check cmd line'
@@ -17,43 +22,43 @@ steps:
     script: |
       ls
 - task: PowerShell@2
-  displayName: 'Instalation MSYS2'
+  displayName: 'Check var'
   inputs:
     targetType: 'inline'
     script: |
-      pwd
-      cd MSYS_install
-      pwd
       ls
-      .\install.ps1
-      "PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/; export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig; export CONFIG_SITE=/mingw64/etc/config.site; export MSYSTEM=MINGW64; ./autogen.sh --no-configure-run; cd win32/installer_msys2; make all"
-- task: PowerShell@2
-  displayName: 'Install additional  tools'
-  inputs:
-    targetType: 'inline'
-    script: |
-      bash 'pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
-      bash 'pacman -S automake-wrapper autoconf make unzip patch'
-- task: PowerShell@2
-  displayName: 'Download projects'
-  inputs:
-    targetType: 'inline'
-    script: |
-      wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip
-      wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O libplist.zip
-      wget https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -O libusbmuxd.zip
-      wget https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -O libimobiledevice.zip
-      wget https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -O ios-webkit-debug-proxy.zip
-      wget https://ftp.pcre.org/pub/pcre/pcre-8.43.zip -O pcre.zip
-
-
-    
-
-
-
-#strategy:
-#  matrix:
-#    mingw-w64-i686-gc
-#      name: '32-bit OpenSSL and MQTT'
-
-                                                                                             
+      echo ${part_command}
+      echo $(part_command)
+  env:
+    gen_command: $(CMD)
+    part_command: replace($(CMD), 'ZZZ', 'wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip')
+#- task: PowerShell@2
+#  displayName: 'Instalation MSYS2'
+#  inputs:
+#    targetType: 'inline'
+#    script: |
+#      pwd
+#      cd MSYS_install
+#      pwd
+#      ls
+#      .\install.ps1
+#      "PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/; export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig; export CONFIG_SITE=/mingw64/etc/config.site; export MSYSTEM=MINGW64; ./autogen.sh --no-configure-run; cd win32/installer_msys2; make all"
+#- task: PowerShell@2
+#  displayName: 'Install additional  tools'
+#  inputs:
+#    targetType: 'inline'
+#    script: |
+#      bash 'pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
+#      bash 'pacman -S automake-wrapper autoconf make unzip patch'
+#- task: PowerShell@2
+#  displayName: 'Download projects'
+#  inputs:
+#    targetType: 'inline'
+#    script: |
+#      wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip
+#      wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O libplist.zip
+#      wget https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -O libusbmuxd.zip
+#      wget https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -O libimobiledevice.zip
+#      wget https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -O ios-webkit-debug-proxy.zip
+#      wget https://ftp.pcre.org/pub/pcre/pcre-8.43.zip -O pcre.zip
+                                                                                           
