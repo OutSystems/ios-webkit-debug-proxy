@@ -7,7 +7,7 @@ pool:
 
 variables:
 - name: CMD 
-  value: cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c
+  value: 'cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c'
   
 steps:
 - task: CmdLine@2
@@ -28,6 +28,7 @@ steps:
     script: |
       echo "1--------"
       echo $(CMD)
+      echo $(CMD) wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip
       echo "2--------"     
   env:
     gen_command: $(CMD)
