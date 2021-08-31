@@ -61,6 +61,8 @@ steps:
     script: |
       cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip'
       cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O libplist.zip'
+      pwd
+      ls
 #      wget https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -O libusbmuxd.zip
 #      wget https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -O libimobiledevice.zip
 #      wget https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -O ios-webkit-debug-proxy.zip
@@ -70,6 +72,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      pwd
+      ls
       unzip libplist.zip
 - task: PowerShell@2
   displayName: 'Install additional  tools 2'
