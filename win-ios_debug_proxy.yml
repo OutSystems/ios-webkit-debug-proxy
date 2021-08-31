@@ -26,12 +26,17 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      ls
+      echo "1--------"
+      echo $(cmd)
+      echo "2--------"
+      echo ${gen_command}
+      echo "3--------"
       echo ${part_command}
+      echo "4--------"
       echo $(part_command)
   env:
     gen_command: $(CMD)
-    part_command: ${{ replace('$(gen_command)','ZZZ','wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip') }}
+    part_command: ${{ replace('${gen_command}','ZZZ','wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip') }}
 #- task: PowerShell@2
 #  displayName: 'Instalation MSYS2'
 #  inputs:
