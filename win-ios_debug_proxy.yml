@@ -7,7 +7,7 @@ pool:
 
 variables:
 - name: CMD 
-  value: cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c ZZZ
+  value: 'cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c'
   
 steps:
 - task: CmdLine@2
@@ -27,16 +27,12 @@ steps:
     targetType: 'inline'
     script: |
       echo "1--------"
-      echo $(cmd)
-      echo "2--------"
       echo ${gen_command}
-      echo "3--------"
-      echo ${part_command}
-      echo "4--------"
-      echo $(part_command)
+      echo "2--------"
+      echo ${{gen_command}}
+      
   env:
     gen_command: $(CMD)
-    part_command: ${{ replace('${gen_command}','ZZZ','wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip') }}
 #- task: PowerShell@2
 #  displayName: 'Instalation MSYS2'
 #  inputs:
