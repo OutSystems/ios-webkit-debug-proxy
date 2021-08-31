@@ -46,15 +46,20 @@ steps:
     targetType: 'inline'
     script: |
       cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -Syu'
-#      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
 #      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S automake-wrapper autoconf make unzip patch'
+- task: PowerShell@2
+  displayName: 'Install additional  tools 2'
+  inputs:
+    targetType: 'inline'
+    script: |
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
 - task: PowerShell@2
   displayName: 'Download projects'
   inputs:
     targetType: 'inline'
     script: |
       cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip'
-#      wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O libplist.zip
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O libplist.zip'
 #      wget https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -O libusbmuxd.zip
 #      wget https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -O libimobiledevice.zip
 #      wget https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -O ios-webkit-debug-proxy.zip
