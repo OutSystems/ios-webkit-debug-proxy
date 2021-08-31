@@ -29,8 +29,7 @@ steps:
       echo "1--------"
       echo ${gen_command}
       echo "2--------"
-      echo ${{gen_command}}
-      
+      echo ${{gen_command}}      
   env:
     gen_command: $(CMD)
 #- task: PowerShell@2
