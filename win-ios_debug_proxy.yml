@@ -27,11 +27,10 @@ steps:
     targetType: 'inline'
     script: |
       echo "1--------"
-      echo ${gen_command}
-      echo "2--------"
-      echo ${{gen_command}}      
-    env:
-      gen_command: $(CMD)
+      echo $(CMD)
+      echo "2--------"     
+  env:
+    gen_command: $(CMD)
 #- task: PowerShell@2
 #  displayName: 'Instalation MSYS2'
 #  inputs:
