@@ -31,7 +31,7 @@ steps:
       echo $(part_command)
   env:
     gen_command: $(CMD)
-    part_command: replace($(CMD), 'ZZZ', 'wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip')
+    part_command: ${{ replace('$(gen_command)','ZZZ','wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip') }}
 #- task: PowerShell@2
 #  displayName: 'Instalation MSYS2'
 #  inputs:
