@@ -7,7 +7,7 @@ pool:
 
 variables:
 - name: CMD 
-  value: "cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c"
+  value: cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c
   
 steps:
 - task: CmdLine@2
