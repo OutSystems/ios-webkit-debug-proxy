@@ -32,20 +32,20 @@ steps:
 #      echo "2--------"     
 #  env:
 #    gen_command: $(CMD)
-- task: PowerShell@2
-  displayName: 'Instalation MSYS2'
-  inputs:
-    targetType: 'inline'
-    script: |
-      cd MSYS_install
-      .\install.ps1
-      "PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/; export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig; export CONFIG_SITE=/mingw64/etc/config.site; export MSYSTEM=MINGW64; ./autogen.sh --no-configure-run; cd win32/installer_msys2; make all"
-- task: PowerShell@2
-  displayName: 'Install additional  tools'
-  inputs:
-    targetType: 'inline'
-    script: |
-      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -Syu'
+#- task: PowerShell@2
+#  displayName: 'Instalation MSYS2'
+#  inputs:
+#    targetType: 'inline'
+#    script: |
+#      cd MSYS_install
+#      .\install.ps1
+#      "PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/; export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig; export CONFIG_SITE=/mingw64/etc/config.site; export MSYSTEM=MINGW64; ./autogen.sh --no-configure-run; cd win32/installer_msys2; make all"
+#- task: PowerShell@2
+#  displayName: 'Install additional  tools'
+#  inputs:
+#    targetType: 'inline'
+#    script: |
+#      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -Syu'
 #      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'      
 #      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S automake-wrapper autoconf make unzip patch'
 #- task: PowerShell@2
@@ -67,7 +67,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Write-Host "search D"
+      Write-Host "search S"
       (Get-ChildItem -Path D:\ -Filter openssl.zip -Recurse -ErrorAction SilentlyContinue -Force).fullname
 - task: PowerShell@2
   displayName: 'Install additional  tools 2'
