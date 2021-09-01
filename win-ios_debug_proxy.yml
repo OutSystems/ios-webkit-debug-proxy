@@ -50,8 +50,6 @@ steps:
 #      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip','D:\a\1\s\home\libimobiledevice.zip')
 #      (new-object System.Net.WebClient).DownloadFile('https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip','D:\a\1\s\home\ios-webkit-debug-proxy.zip')
 #      (new-object System.Net.WebClient).DownloadFile('https://ftp.pcre.org/pub/pcre/pcre-8.43.zip','D:\a\1\s\home\pcre.zip')
-      pwd
-      ls
 - task: PowerShell@2
   displayName: 'Extract projects'
   inputs:
