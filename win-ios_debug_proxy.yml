@@ -42,7 +42,9 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      (new-object System.Net.WebClient).DownloadFile('https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip','D:\a\1\s\home\openssl.zip')
+      mkdir home
+      cd home
+      (new-object System.Net.WebClient).DownloadFile('https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip','openssl.zip')
       pwd
       ls
 - task: PowerShell@2
