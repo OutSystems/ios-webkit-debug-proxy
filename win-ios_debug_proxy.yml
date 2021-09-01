@@ -59,8 +59,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O openssl.zip'
-      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O libplist.zip'
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -O D:\a\1\s\openssl.zip'
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O D:\a\1\s\libplist.zip'
       pwd
       ls
 #      wget https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -O libusbmuxd.zip
@@ -74,8 +74,6 @@ steps:
     script: |
       Write-Host "search D"
       (Get-ChildItem -Path D:\ -Filter openssl.zip -Recurse -ErrorAction SilentlyContinue -Force).fullname
-      Write-Host "search C"
-      (Get-ChildItem -Path C:\ -Filter openssl.zip -Recurse -ErrorAction SilentlyContinue -Force).fullname
 - task: PowerShell@2
   displayName: 'Install additional  tools 2'
   inputs:
