@@ -72,7 +72,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      Write-Host "search D"
       (Get-ChildItem -Path D:\ -Filter openssl.zip -Recurse -ErrorAction SilentlyContinue -Force).fullname
+      Write-Host "search C"
+      (Get-ChildItem -Path C:\ -Filter openssl.zip -Recurse -ErrorAction SilentlyContinue -Force).fullname
 - task: PowerShell@2
   displayName: 'Install additional  tools 2'
   inputs:
