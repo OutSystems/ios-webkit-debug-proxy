@@ -65,6 +65,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      cd home/libplist-2.2.0/
+      cd home/libplist/libplist-2.2.0/
       ./autogen.sh --without-cython
       make install -j4                                                                                                     
