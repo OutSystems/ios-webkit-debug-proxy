@@ -45,11 +45,11 @@ steps:
       mkdir home
       cd home
       (new-object System.Net.WebClient).DownloadFile('https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip','D:\a\1\s\home\openssl.zip')
-      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libplist/archive/2.2.0.zip','D:\a\1\s\home\libplist.zip')
-      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip','D:\a\1\s\home\ibusbmuxd.zip')
-      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip','D:\a\1\s\home\libimobiledevice.zip')
-      (new-object System.Net.WebClient).DownloadFile('https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip','D:\a\1\s\home\ios-webkit-debug-proxy.zip')
-      (new-object System.Net.WebClient).DownloadFile('https://ftp.pcre.org/pub/pcre/pcre-8.43.zip','D:\a\1\s\home\pcre.zip')
+#      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libplist/archive/2.2.0.zip','D:\a\1\s\home\libplist.zip')
+#      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip','D:\a\1\s\home\ibusbmuxd.zip')
+#      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip','D:\a\1\s\home\libimobiledevice.zip')
+#      (new-object System.Net.WebClient).DownloadFile('https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip','D:\a\1\s\home\ios-webkit-debug-proxy.zip')
+#      (new-object System.Net.WebClient).DownloadFile('https://ftp.pcre.org/pub/pcre/pcre-8.43.zip','D:\a\1\s\home\pcre.zip')
       pwd
       ls
 - task: PowerShell@2
@@ -61,9 +61,9 @@ steps:
       pwd
       ls
       Get-ChildItem *.zip | Expand-Archive
-      ls
+      Get-ChildItem
 - task: PowerShell@2
-  displayName: 'Install additional  tools 2'
+  displayName: 'First installation'
   inputs:
     targetType: 'inline'
     script: |
