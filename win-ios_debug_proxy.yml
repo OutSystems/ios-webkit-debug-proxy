@@ -68,6 +68,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Set-Location C:\msys64\Location\libplist-2.2.0\
+      Set-Location C:\msys64\Location\libplist\libplist-2.2.0\
       cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c './autogen.sh'
       cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'C:\msys64\mingw64\bin\mingw32-make.exe install j4'                                                                                                 
