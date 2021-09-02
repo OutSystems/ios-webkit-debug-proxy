@@ -60,9 +60,8 @@ steps:
       Set-Location C:\msys64\
       pwd
       Get-ChildItem
-      Get-ChildItem *.zip | Expand-Archive
-      Get-ChildItem
       Set-Location C:\msys64\Location
+      Get-ChildItem *.zip | Expand-Archive
       Get-ChildItem
 - task: PowerShell@2
   displayName: 'First installation'
