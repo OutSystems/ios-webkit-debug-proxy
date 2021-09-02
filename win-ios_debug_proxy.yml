@@ -32,7 +32,7 @@ steps:
 #      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'      
 #      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman -S automake-wrapper autoconf make unzip patch'
 - task: PowerShell@2
-  displayName: 'Install additional  tools 2'
+  displayName: 'See files'
   inputs:
     targetType: 'inline'
     script: |
@@ -44,8 +44,8 @@ steps:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64 
-      mkdir home
-      Get-ChildItem home
+      mkdir C:\msys64\home
+      Set-Location C:\msys64\home
       (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libplist/archive/2.2.0.zip','C:\msys64\home\libplist.zip')
 #      (new-object System.Net.WebClient).DownloadFile('https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip','D:\a\1\s\home\openssl.zip')
 #      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip','D:\a\1\s\home\ibusbmuxd.zip')
