@@ -57,6 +57,16 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      Set-Location C:\msys64\
+      pwd
+      Get-ChildItem
+      Get-ChildItem *.zip | Expand-Archive
+      Get-ChildItem
+- task: PowerShell@2
+  displayName: 'Extract projects'
+  inputs:
+    targetType: 'inline'
+    script: |
       Set-Location C:\msys64\Location
       pwd
       Get-ChildItem
@@ -68,5 +78,5 @@ steps:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location\libplist\libplist-2.2.0\
-      ./autogen.sh --without-cython
-      make install -j4                                                                                                     
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c './autogen.sh'
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'C:\msys64\mingw64\bin\mingw32-make.exe install j4'                                                                                                 
