@@ -69,13 +69,15 @@ steps:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location\libplist\libplist-2.2.0\
-      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c './autogen.sh'
-      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'C:\msys64\mingw64\bin\mingw32-make.exe install j4'
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'C/msys64/Location/libplist/libplist-2.2.0/autogen.sh'
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'C/msys64/mingw64/bin/mingw32-make.exe install j4'
 - task: PowerShell@2
   displayName: 'Installation check'
   inputs:
     targetType: 'inline'
     script: |
+      pwd
+      Get-ChildItem 
       Set-Location C:\msys64\Location\libplist\libplist-2.2.0\src\.libs\
       pwd
       Get-ChildItem                                                                                               
