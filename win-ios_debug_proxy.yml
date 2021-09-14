@@ -10,13 +10,8 @@ variables:
   value: 'cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c'
   
 steps:
-- task: CmdLine@2
-  displayName: 'Check cmd line'
-  inputs:
-    script: |
-      ls
 - task: PowerShell@2
-  displayName: 'Instalation MSYS2'
+  displayName: '🛠️ MSYS2 installation'
   inputs:
     targetType: 'inline'
     script: |
@@ -31,7 +26,7 @@ steps:
       Set-Location C:\msys64
       Get-ChildItem
 - task: PowerShell@2
-  displayName: 'Download projects'
+  displayName: '📥 Download projects'
   inputs:
     targetType: 'inline'
     script: |
