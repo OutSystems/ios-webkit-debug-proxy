@@ -35,10 +35,10 @@ steps:
       Set-Location C:\msys64\Location
       (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libplist/archive/2.2.0.zip','C:\msys64\Location\libplist.zip')
       (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip','C:\msys64\Location\libusbmuxd.zip')
-#      (new-object System.Net.WebClient).DownloadFile('https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip','C:\msys64\Location\openssl.zip')
-#      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip','D:\a\1\s\Location\libimobiledevice.zip')
-#      (new-object System.Net.WebClient).DownloadFile('https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip','D:\a\1\s\Location\ios-webkit-debug-proxy.zip')
-#      (new-object System.Net.WebClient).DownloadFile('https://ftp.pcre.org/pub/pcre/pcre-8.43.zip','D:\a\1\s\Location\pcre.zip')
+      (new-object System.Net.WebClient).DownloadFile('https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip','C:\msys64\Location\openssl.zip')
+      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip','C:\msys64\Location\libimobiledevice.zip')
+      (new-object System.Net.WebClient).DownloadFile('https://ftp.pcre.org/pub/pcre/pcre-8.43.zip','C:\msys64\Location\pcre.zip')
+      (new-object System.Net.WebClient).DownloadFile('https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip','C:\msys64\Location\ios-webkit-debug-proxy.zip')
 - task: PowerShell@2
   displayName: 'Extract projects'
   inputs:
@@ -65,6 +65,44 @@ steps:
       C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libusbmuxd-2.0.2/autogen.sh'
       C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
 - task: PowerShell@2
+  displayName: '📦 openssl build'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Set-Location C:\msys64\Location\openssl-OpenSSL_1_1_1\
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c './Configure --prefix=/mingw32 no-idea no-mdc2 no-rc5 shared mingw'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make -j4'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install_sw -j4'
+- task: PowerShell@2
+  displayName: '📦 libimobiledevice build'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Set-Location C:\msys64\Location\libimobiledevice-1.3.0\
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'wget https://raw.githubusercontent.com/Orbif/libimobiledevice-patchs/master/libimobiledevice-socket-mingw-compatibility.patch'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'patch -p 1 < libimobiledevice-socket-mingw-compatibility.patch'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c './autogen.sh --without-cython'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
+- task: PowerShell@2
+  displayName: '📦 pcre build'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Set-Location C:\msys64\Location\pcre-8.43\
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c './configure'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
+- task: PowerShell@2
+  displayName: '📦 ios-webkit-debug-proxy-outsystems build'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Set-Location C:\msys64\Location\ios-webkit-debug-proxy-outsystems\
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c './autogen.sh'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make -j4'
+###################
+# Check that generated libs/dlls are there
+################### 
+- task: PowerShell@2
   displayName: 'Installation check'
   inputs:
     targetType: 'inline'
@@ -74,4 +112,18 @@ steps:
       Get-ChildItem libplist-2.0.dll
       Set-Location C:\msys64\Location\libusbmuxd-2.0.2\src\.libs\
       pwd
-      Get-ChildItem libusbmuxd-2.0.dll                                                                                                    
+      Get-ChildItem libusbmuxd-2.0.dll
+      Set-Location C:\msys64\Location\openssl-OpenSSL_1_1_1\
+      pwd
+      Get-ChildItem libcrypto-1_1.dll
+      Get-ChildItem libssl-1_1.dll
+      Set-Location C:\msys64\Location\libimobiledevice-1.3.0\src\.libs\
+      Get-ChildItem libimobiledevice-1.0.dll
+      Set-Location C:\msys64\Location\pcre-8.43\.libs\
+      Get-ChildItem libpcre-1.dll
+      Get-ChildItem libpcreposix-0.dll
+      Set-Location C:\msys64\Location\ios-webkit-debug-proxy-outsystems\src\.libs\
+      Get-ChildItem ios_webkit_debug_proxy.exe
+      Set-Location C:\msys64\mingw32\bin\
+      Get-ChildItem libgcc_s_dw2-1.dll
+      Get-ChildItem libwinpthread-1.dll                                                                                                    
