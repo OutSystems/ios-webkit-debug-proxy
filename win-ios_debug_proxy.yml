@@ -15,6 +15,9 @@ steps:
   inputs:
     targetType: 'inline'
     script: 
+      Set-Location C:\
+      mkdir C:\msys64
+      Set-Location C:\msys64
       mkdir C:\msys64\Location
       Set-Location C:\msys64\Location
       (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libplist/archive/2.2.0.zip','C:/msys64/Location/libplist.zip') 
