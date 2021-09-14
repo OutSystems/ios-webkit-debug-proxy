@@ -35,7 +35,7 @@ steps:
       Set-Location C:\msys64\Location
       (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libplist/archive/2.2.0.zip','C:\msys64\Location\libplist.zip')
       (new-object System.Net.WebClient).DownloadFile('https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip','C:\msys64\Location\openssl.zip')
-#      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip','D:\a\1\s\Location\ibusbmuxd.zip')
+      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip','C:\msys64\Location\libusbmuxd.zip')
 #      (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip','D:\a\1\s\Location\libimobiledevice.zip')
 #      (new-object System.Net.WebClient).DownloadFile('https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip','D:\a\1\s\Location\ios-webkit-debug-proxy.zip')
 #      (new-object System.Net.WebClient).DownloadFile('https://ftp.pcre.org/pub/pcre/pcre-8.43.zip','D:\a\1\s\Location\pcre.zip')
@@ -53,6 +53,14 @@ steps:
     script: |
       Set-Location C:\msys64\Location\libplist\libplist-2.2.0\
       C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libplist/libplist-2.2.0/autogen.sh --without-cython'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
+- task: PowerShell@2
+  displayName: '📦 libusbmuxd build'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Set-Location C:\msys64\Location\libusbmuxd\libusbmuxd-2.0.2\
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libusbmuxd/libusbmuxd-2.0.2/autogen.sh --without-cython'
       C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
 - task: PowerShell@2
   displayName: 'Installation check'
