@@ -70,7 +70,7 @@ steps:
     script: |
       Set-Location C:\msys64\Location\libplist\libplist-2.2.0\
       C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libplist/libplist-2.2.0/autogen.sh --without-cython'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'install j4'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
 - task: PowerShell@2
   displayName: 'Installation check'
   inputs:
