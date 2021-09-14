@@ -45,7 +45,7 @@ steps:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location
-      Get-ChildItem *.zip | Expand-Archive
+      Get-ChildItem *.zip | Expand-Archive -DestinationPath C:\msys64\Location\
 - task: PowerShell@2
   displayName: '📦 liblist build'
   inputs:
@@ -69,4 +69,7 @@ steps:
     script: |
       Set-Location C:\msys64\Location\libplist\libplist-2.2.0\src\.libs\
       pwd
-      Get-ChildItem libplist-2.0.dll                                                                                               
+      Get-ChildItem libplist-2.0.dll
+      Set-Location C:\msys64\Location\libusbmuxd\libusbmuxd-2.0.2\
+      pwd
+      Get-ChildItem libusbmuxd-2.0.dll                                                                                                    
