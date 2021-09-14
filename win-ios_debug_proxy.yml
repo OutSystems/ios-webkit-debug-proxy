@@ -51,25 +51,25 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Set-Location C:\msys64\Location\libplist\libplist-2.2.0\
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libplist/libplist-2.2.0/autogen.sh --without-cython'
+      Set-Location C:\msys64\Location\libplist-2.2.0\
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libplist-2.2.0/autogen.sh --without-cython'
       C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
 - task: PowerShell@2
   displayName: '📦 libusbmuxd build'
   inputs:
     targetType: 'inline'
     script: |
-      Set-Location C:\msys64\Location\libusbmuxd\libusbmuxd-2.0.2\
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libusbmuxd/libusbmuxd-2.0.2/autogen.sh --without-cython'
+      Set-Location C:\msys64\Location\libusbmuxd-2.0.2\
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libusbmuxd-2.0.2/autogen.sh --without-cython'
       C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
 - task: PowerShell@2
   displayName: 'Installation check'
   inputs:
     targetType: 'inline'
     script: |
-      Set-Location C:\msys64\Location\libplist\libplist-2.2.0\src\.libs\
+      Set-Location C:\msys64\Location\libplist-2.2.0\src\.libs\
       pwd
       Get-ChildItem libplist-2.0.dll
-      Set-Location C:\msys64\Location\libusbmuxd\libusbmuxd-2.0.2\
+      Set-Location C:\msys64\Location\libusbmuxd-2.0.2\
       pwd
       Get-ChildItem libusbmuxd-2.0.dll                                                                                                    
