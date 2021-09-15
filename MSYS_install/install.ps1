@@ -40,10 +40,10 @@ bash 'pacman -Syu --noconfirm'
 bash 'pacman -Syu --noconfirm'
 
 # install packages
-bash 'pacman --sync --noconfirm VCS'
-bash 'pacman --sync --noconfirm base-devel'
-bash 'pacman --sync --noconfirm msys2-devel'
-bash 'pacman --sync --noconfirm mingw-w64-{x86_64,i686}-toolchain'
+#bash 'pacman --sync --noconfirm VCS'
+#bash 'pacman --sync --noconfirm base-devel'
+#bash 'pacman --sync --noconfirm msys2-devel'
+#bash 'pacman --sync --noconfirm mingw-w64-{x86_64,i686}-toolchain'
 
 # cleanup pacman cache
 Remove-Item c:\msys64\var\cache\pacman\pkg -Recurse -Force
