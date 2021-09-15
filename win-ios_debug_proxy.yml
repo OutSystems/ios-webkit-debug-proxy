@@ -30,8 +30,10 @@ steps:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64
-      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -here -c 'pacman --noconfirm -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
-      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman --noconfirm -S automake-wrapper autoconf make unzip patch'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'pacman --noconfirm -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
+      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'pacman --noconfirm -S automake-wrapper autoconf make unzip patch'
+#      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -here -c 'pacman --noconfirm -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
+#      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman --noconfirm -S automake-wrapper autoconf make unzip patch'
 ###################
 # Check on files
 ################### 
