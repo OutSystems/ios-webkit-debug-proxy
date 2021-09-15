@@ -10,6 +10,9 @@ variables:
   value: 'cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c'
   
 steps:
+###################
+# MSYS2 installation
+################### 
 - task: PowerShell@2
   displayName: '🛠️ MSYS2 installation'
   inputs:
@@ -18,6 +21,20 @@ steps:
       cd MSYS_install
       .\install.ps1
       "PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/; export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig; export CONFIG_SITE=/mingw64/etc/config.site; export MSYSTEM=MINGW64; ./autogen.sh --no-configure-run; cd win32/installer_msys2; make all"
+###################
+# Additional tool installation
+################### 
+- task: PowerShell@2
+  displayName: '🛠️ Additional tool installation'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Set-Location C:\msys64
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -here -c 'pacman --noconfirm -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
+      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman --noconfirm -S automake-wrapper autoconf make unzip patch'
+###################
+# Check on files
+################### 
 - task: PowerShell@2
   displayName: '👀 see files'
   inputs:
@@ -25,6 +42,9 @@ steps:
     script: |
       Set-Location C:\msys64
       Get-ChildItem
+###################
+# Download projects
+###################       
 - task: PowerShell@2
   displayName: '📥 Download projects'
   inputs:
@@ -39,6 +59,9 @@ steps:
       (new-object System.Net.WebClient).DownloadFile('https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip','C:\msys64\Location\libimobiledevice.zip')
       (new-object System.Net.WebClient).DownloadFile('https://ftp.pcre.org/pub/pcre/pcre-8.43.zip','C:\msys64\Location\pcre.zip')
       (new-object System.Net.WebClient).DownloadFile('https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip','C:\msys64\Location\ios-webkit-debug-proxy.zip')
+###################
+# Extract projects
+################### 
 - task: PowerShell@2
   displayName: '🧮 extract projects'
   inputs:
