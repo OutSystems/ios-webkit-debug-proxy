@@ -46,6 +46,8 @@ steps:
     script: |
       Set-Location C:\msys64\Location
       Get-ChildItem *.zip | Expand-Archive -DestinationPath C:\msys64\Location\
+      pwd
+      Get-ChildItem 
 - task: PowerShell@2
   displayName: '📦 liblist build'
   inputs:
