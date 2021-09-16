@@ -35,7 +35,7 @@ function bash($command) {
 #bash 'pacman -Sy --noconfirm pacman pacman-mirrors'
 
 # update core packages
-bash 'pacman -Syuu --needed --noconfirm --ask=20'
+#bash 'pacman -Syuu --needed --noconfirm --ask=20'
 bash 'pacman -Syu --noconfirm'
 bash 'pacman -Syu --noconfirm'
 
