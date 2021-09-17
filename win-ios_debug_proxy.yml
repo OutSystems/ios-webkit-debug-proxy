@@ -171,12 +171,12 @@ steps:
       Copy-Item "C:\msys64\Location\ios-webkit-debug-proxy-outsystems\src\.libs\ios_webkit_debug_proxy.exe" -Destination "C:\msys64\bundle"
       Copy-Item "C:\msys64\mingw32\bin\libgcc_s_dw2-1.dll" -Destination "C:\msys64\bundle"
       Copy-Item "C:\msys64\mingw32\bin\libwinpthread-1.dll" -Destination "C:\msys64\bundle"
-      Compress-Archive -Path C:\msys64\bundle -DestinationPath C:\msys64\archive.zip
+      Compress-Archive -Path C:\msys64\bundle -DestinationPath C:\msys64\WIN_exportLib.zip
 ###################
 # Publish the artifact
 ################### 
 - task: PublishPipelineArtifact@1
   displayName: '🍻 Publish libs'
   inputs:
-    targetPath: C:\msys64\archive.zip
+    targetPath: C:\msys64\WIN_exportLib.zip
     artifactName: 'Libraries'                                                                                                      
