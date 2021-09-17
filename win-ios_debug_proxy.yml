@@ -6,8 +6,10 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-- name: CMD 
-  value: 'cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c'
+- name: MINGW32 
+  value: C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c
+- name: MAC_exportLib 
+  value: /Users/runner/exportedLibs.tar
   
 steps:
 ###################
@@ -30,10 +32,8 @@ steps:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'pacman --noconfirm -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'pacman --noconfirm -S automake-wrapper autoconf make unzip patch'
-#      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -here -c 'pacman --noconfirm -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
-#      cmd /c start /wait C:\msys64\usr\bin\sh.exe --login -c 'pacman --noconfirm -S automake-wrapper autoconf make unzip patch'
+      $(MINGW32) 'pacman --noconfirm -S mingw-w64-i686-gcc mingw-w64-i686-libtool mingw-w64-i686-pkg-config'
+      $(MINGW32) 'pacman --noconfirm -S automake-wrapper autoconf make unzip patch'
 ###################
 # Check on files
 ################### 
@@ -79,53 +79,53 @@ steps:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location\libplist-2.2.0\
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libplist-2.2.0/autogen.sh --without-cython'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
+      $(MINGW32) 'C:/msys64/Location/libplist-2.2.0/autogen.sh --without-cython'
+      $(MINGW32) 'make install -j4'
 - task: PowerShell@2
   displayName: '📦 libusbmuxd build'
   inputs:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location\libusbmuxd-2.0.2\
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'wget https://raw.githubusercontent.com/Orbif/libimobiledevice-patchs/master/libimobiledevice-socket-mingw-compatibility.patch'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'patch -p 1 < libimobiledevice-socket-mingw-compatibility.patch'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'C:/msys64/Location/libusbmuxd-2.0.2/autogen.sh'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
+      $(MINGW32) 'wget https://raw.githubusercontent.com/Orbif/libimobiledevice-patchs/master/libimobiledevice-socket-mingw-compatibility.patch'
+      $(MINGW32) 'patch -p 1 < libimobiledevice-socket-mingw-compatibility.patch'
+      $(MINGW32) 'C:/msys64/Location/libusbmuxd-2.0.2/autogen.sh'
+      $(MINGW32) 'make install -j4'
 - task: PowerShell@2
   displayName: '📦 openssl build'
   inputs:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location\openssl-OpenSSL_1_1_1\
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c './Configure --prefix=/mingw32 no-idea no-mdc2 no-rc5 shared mingw'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make -j4'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install_sw -j4'
+      $(MINGW32) './Configure --prefix=/mingw32 no-idea no-mdc2 no-rc5 shared mingw'
+      $(MINGW32) 'make -j4'
+      $(MINGW32) 'make install_sw -j4'
 - task: PowerShell@2
   displayName: '📦 libimobiledevice build'
   inputs:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location\libimobiledevice-1.3.0\
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'wget https://raw.githubusercontent.com/Orbif/libimobiledevice-patchs/master/libimobiledevice-socket-mingw-compatibility.patch'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'patch -p 1 < libimobiledevice-socket-mingw-compatibility.patch'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c './autogen.sh --without-cython'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
+      $(MINGW32) 'wget https://raw.githubusercontent.com/Orbif/libimobiledevice-patchs/master/libimobiledevice-socket-mingw-compatibility.patch'
+      $(MINGW32) 'patch -p 1 < libimobiledevice-socket-mingw-compatibility.patch'
+      $(MINGW32) './autogen.sh --without-cython'
+      $(MINGW32) 'make install -j4'
 - task: PowerShell@2
   displayName: '📦 pcre build'
   inputs:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location\pcre-8.43\
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c './configure'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make install -j4'
+      $(MINGW32) './configure'
+      $(MINGW32) 'make install -j4'
 - task: PowerShell@2
   displayName: '📦 ios-webkit-debug-proxy-outsystems build'
   inputs:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location\ios-webkit-debug-proxy-outsystems\
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c './autogen.sh'
-      C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c 'make -j4'
+      $(MINGW32) './autogen.sh'
+      $(MINGW32) 'make -j4'
 ###################
 # Check that generated libs/dlls are there
 ################### 
@@ -135,22 +135,48 @@ steps:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location\libplist-2.2.0\src\.libs\
-      pwd
-      Get-ChildItem libplist-2.0.dll
+      (Get-ChildItem libplist-2.0.dll).fullname
       Set-Location C:\msys64\Location\libusbmuxd-2.0.2\src\.libs\
-      pwd
-      Get-ChildItem libusbmuxd-2.0.dll
+      (Get-ChildItem libusbmuxd-2.0.dll).fullname
       Set-Location C:\msys64\Location\openssl-OpenSSL_1_1_1\
-      pwd
-      Get-ChildItem libcrypto-1_1.dll
-      Get-ChildItem libssl-1_1.dll
+      (Get-ChildItem libcrypto-1_1.dll).fullname
+      (Get-ChildItem libssl-1_1.dll).fullname
       Set-Location C:\msys64\Location\libimobiledevice-1.3.0\src\.libs\
-      Get-ChildItem libimobiledevice-1.0.dll
+      (Get-ChildItem libimobiledevice-1.0.dll).fullname
       Set-Location C:\msys64\Location\pcre-8.43\.libs\
-      Get-ChildItem libpcre-1.dll
-      Get-ChildItem libpcreposix-0.dll
+      (Get-ChildItem libpcre-1.dll).fullname
+      (Get-ChildItem libpcreposix-0.dll).fullname
       Set-Location C:\msys64\Location\ios-webkit-debug-proxy-outsystems\src\.libs\
-      Get-ChildItem ios_webkit_debug_proxy.exe
+      (Get-ChildItem ios_webkit_debug_proxy.exe).fullname
       Set-Location C:\msys64\mingw32\bin\
-      Get-ChildItem libgcc_s_dw2-1.dll
-      Get-ChildItem libwinpthread-1.dll                                                                                                    
+      (Get-ChildItem libgcc_s_dw2-1.dll).fullname
+      (Get-ChildItem libwinpthread-1.dll).fullname
+###################
+# Copy and archive needed files
+################### 
+- task: PowerShell@2
+  displayName: '🗂️ Copy and archive needed files'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Set-Location C:\msys64 
+      mkdir C:\msys64\bundle
+      Copy-Item "C:\msys64\Location\libplist-2.2.0\src\.libs\libplist-2.0.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\Location\libusbmuxd-2.0.2\src\.libs\libusbmuxd-2.0.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\Location\openssl-OpenSSL_1_1_1\libcrypto-1_1.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\Location\openssl-OpenSSL_1_1_1\libssl-1_1.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\Location\libimobiledevice-1.3.0\src\.libs\libimobiledevice-1.0.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\Location\pcre-8.43\.libs\libpcre-1.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\Location\pcre-8.43\.libs\libpcreposix-0.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\Location\ios-webkit-debug-proxy-outsystems\src\.libs\ios_webkit_debug_proxy.exe" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\mingw32\bin\libgcc_s_dw2-1.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\mingw32\bin\libwinpthread-1.dll" -Destination "C:\msys64\bundle"
+      Compress-Archive -Path C:\msys64\bundle -DestinationPath C:\msys64\archive.zip
+###################
+# Publish the artifact
+################### 
+- task: PublishPipelineArtifact@1
+  displayName: '🍻 Publish libs'
+  inputs:
+    targetPath: C:\msys64\archive.zip
+    artifactName: 'Libraries'                                                                                                      
