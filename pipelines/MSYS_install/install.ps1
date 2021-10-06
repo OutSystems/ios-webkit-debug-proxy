@@ -6,7 +6,8 @@ Set-Content -Value "Write-Host 'Sleep then kill gpg-agent.exe'; sleep 300; Stop-
 Start-Process powershell.exe -ArgumentList .\kill-gpg-agent.ps1
 
 if(Test-path C:\msys64) {
-    del C:\msys64 -Recurse -Force -Verbose
+    Write-Host "Removing old installation, this can take a while..." -ForegroundColor Cyan
+    del C:\msys64 -Recurse -Force
 }
 
 # download installer
@@ -14,13 +15,12 @@ $zipPath = "$($env:TEMP)\msys2-x86_64-latest.tar.xz"
 $tarPath = "$($env:TEMP)\msys2-x86_64-latest.tar"
 Write-Host "Downloading MSYS installation package..."
 Invoke-WebRequest -Uri 'http://repo.msys2.org/distrib/msys2-x86_64-latest.tar.xz' -OutFile $zipPath
-#(New-Object Net.WebClient).DownloadFile('http://repo.msys2.org/distrib/msys2-x86_64-latest.tar.xz', $zipPath)
 
 Write-Host "Untaring installation package..."
-7z x $zipPath -y -o"$env:TEMP" #| Out-Null
+7z x $zipPath -y -o"$env:TEMP" | Out-Null
 
 Write-Host "Unzipping installation package..."
-7z x $tarPath -y -oC:\ #| Out-Null
+7z x $tarPath -y -oC:\ | Out-Null
 del $zipPath
 del $tarPath
 
@@ -45,7 +45,7 @@ cmd /c assoc .sh=sh_auto_file
 
 # compact folder
 Write-Host "Compacting C:\msys64..." -NoNewline
-compact /c /i /s:C:\msys64 # | Out-Null
+compact /c /i /s:C:\msys64 | Out-Null
 Write-Host "OK" -ForegroundColor Green
 
 Remove-Item .\kill-gpg-agent.ps1 -Force -ErrorAction Ignore
