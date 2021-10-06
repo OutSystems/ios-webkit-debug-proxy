@@ -76,8 +76,18 @@ steps:
     targetType: 'inline'
     script: |
       Set-Location C:\msys64\Location
-      Get-ChildItem *.zip | Microsoft.PowerShell.Archive\Expand-Archive -DestinationPath C:\msys64\Location\ -PassThru 
-      pwd
+      Write-Host 'Extracting libplist'
+      Expand-Archive -Path libplist.zip -DestinationPath C:\msys64\Location\ 
+      Write-Host 'Extracting libusbmuxd'
+      Expand-Archive -Path libusbmuxd.zip -DestinationPath C:\msys64\Location\ 
+      Write-Host 'Extracting openssl'
+      Expand-Archive -Path openssl.zip -DestinationPath C:\msys64\Location\ 
+      Write-Host 'Extracting libimobiledevice'
+      Expand-Archive -Path libimobiledevice.zip -DestinationPath C:\msys64\Location\ 
+      Write-Host 'Extracting pcre'
+      Expand-Archive -Path pcre.zip -DestinationPath C:\msys64\Location\ 
+      Write-Host 'Extracting ios-webkit-debug-proxy'
+      Expand-Archive -Path ios-webkit-debug-proxy.zip -DestinationPath C:\msys64\Location\ 
       Get-ChildItem 
 - task: PowerShell@2
   displayName: '📦 liblist build'
