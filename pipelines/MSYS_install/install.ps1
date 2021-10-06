@@ -2,8 +2,8 @@
 
 Write-Host "Installing MSYS2..." -ForegroundColor Cyan
 
-Set-Content -Value "Write-Host 'Sleep then kill gpg-agent.exe'; sleep 300; Stop-Process -name gpg-agent -Force" -Path .\kill-gpg-agent.ps1
-Start-Process powershell.exe -ArgumentList .\kill-gpg-agent.ps1
+#Set-Content -Value "Write-Host 'Sleep then kill gpg-agent.exe'; sleep 300; Stop-Process -name gpg-agent -Force" -Path .\kill-gpg-agent.ps1
+#Start-Process powershell.exe -ArgumentList .\kill-gpg-agent.ps1
 
 if(Test-path C:\msys64) {
     del C:\msys64 -Recurse -Force
