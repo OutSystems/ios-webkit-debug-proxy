@@ -31,19 +31,9 @@ function bash($command) {
 
 [Environment]::SetEnvironmentVariable("MSYS2_PATH_TYPE", "inherit", "Machine")
 
-# install latest pacman
-#bash 'pacman -Sy --noconfirm pacman pacman-mirrors'
-
 # update core packages
-#bash 'pacman -Syuu --needed --noconfirm --ask=20'
 bash 'pacman -Syuu --noconfirm'
 bash 'pacman -Syu --noconfirm'
-
-# install packages
-#bash 'pacman --sync --noconfirm VCS'
-#bash 'pacman --sync --noconfirm base-devel'
-#bash 'pacman --sync --noconfirm msys2-devel'
-#bash 'pacman --sync --noconfirm mingw-w64-{x86_64,i686}-toolchain'
 
 # cleanup pacman cache
 Remove-Item c:\msys64\var\cache\pacman\pkg -Recurse -Force

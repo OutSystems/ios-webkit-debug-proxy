@@ -76,7 +76,7 @@ steps:
           pwd
           ls -l
 ###################
-# Installation of neccesary builds
+# Installation of necessary builds
 ################### 
 - task: CmdLine@2 
   displayName: '📦 liblist build'
