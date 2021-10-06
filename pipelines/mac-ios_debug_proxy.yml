@@ -168,7 +168,7 @@ steps:
   inputs:
       script: |
           cd ~/build_ios_proxy/bundle
-          tar -cvf $(exportLib) *
+          tar -cvf $(MAC_exportLib) *
 ###################
 # Publish the artifact
 ################### 
