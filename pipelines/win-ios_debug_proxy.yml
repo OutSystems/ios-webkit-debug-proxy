@@ -44,6 +44,8 @@ steps:
     script: |
       Set-Location C:\msys64
       Get-ChildItem
+      Set-Location C:\msys64\mingw32\i686-w64-mingw32\include\sys
+      Get-ChildItem
 ###################
 # Download projects
 ###################       

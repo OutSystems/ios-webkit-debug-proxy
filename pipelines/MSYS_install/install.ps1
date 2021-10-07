@@ -45,7 +45,7 @@ cmd /c assoc .sh=sh_auto_file
 
 # compact folder
 Write-Host "Compacting C:\msys64..."
-compact /c /i /s:C:\msys64 | Out-Null
+compact /c /i /s:C:\msys64
 Write-Host "OK" -ForegroundColor Green
 
 Remove-Item .\kill-gpg-agent.ps1 -Force -ErrorAction Ignore
