@@ -7,7 +7,7 @@ pool:
 
 variables:
 - name: MINGW32 
-  value: C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -full-path -here -c
+  value: C:\msys64\msys2_shell.cmd -defterm -mingw32 -no-start -here -c
 - name: MAC_exportLib 
   value: /Users/runner/exportedLibs.tar
   
