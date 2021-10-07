@@ -46,6 +46,8 @@ steps:
       Get-ChildItem
       Set-Location C:\msys64\mingw32\i686-w64-mingw32\include\sys
       Get-ChildItem
+      $(MINGW32) 'which gcc'
+      $(MINGW32) 'gcc --version'
 ###################
 # Download projects
 ###################       
