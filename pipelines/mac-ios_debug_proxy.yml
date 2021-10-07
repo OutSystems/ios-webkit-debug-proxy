@@ -176,4 +176,4 @@ steps:
   displayName: '🍻 Publish libs'
   inputs:
     targetPath: $(MAC_exportLib)
-    artifactName: 'Libraries'                                                                                                      
+    artifactName: 'Libraries'
