@@ -5,10 +5,10 @@ Write-Host "Installing MSYS2..." -ForegroundColor Cyan
 Set-Content -Value "Write-Host 'Sleep then kill gpg-agent.exe'; sleep 300; Stop-Process -name gpg-agent -Force" -Path .\kill-gpg-agent.ps1
 Start-Process powershell.exe -ArgumentList .\kill-gpg-agent.ps1
 
-#if(Test-path C:\msys64) {
-#    Write-Host "Removing old installation, this can take a while..." -ForegroundColor Cyan
-#    del C:\msys64 -Recurse -Force
-#}
+if(Test-path C:\msys64) {
+    Write-Host "Removing old installation, this can take a while..." -ForegroundColor Cyan
+    del C:\msys64 -Recurse -Force
+}
 
 # download installer
 $zipPath = "$($env:TEMP)\msys2-x86_64-latest.tar.xz"
