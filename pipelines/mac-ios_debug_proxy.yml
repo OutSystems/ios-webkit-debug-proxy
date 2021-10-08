@@ -1,6 +1,7 @@
 #ios_debug_proxy pipeline for getting libraries and binary
 
-trigger: none
+trigger:
+- outsystems
 
 pool:
   vmImage: 'macOS-latest'
