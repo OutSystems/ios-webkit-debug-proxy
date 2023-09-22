@@ -33,12 +33,12 @@ How to 'create' a x86 Terminal: https://osxdaily.com/2020/11/18/how-run-homebrew
     * `export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"`
 
 10. Download the projects
-    * `curl -L https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.zip -o openssl.zip`
+    * `curl -L https://github.com/openssl/openssl/archive/openssl-3.0.11.zip -o openssl.zip`
     * `curl -L https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -o libplist.zip`
     * `curl -L https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -o libusbmuxd.zip`
     * `curl -L https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -o libimobiledevice.zip`
     * `curl -L https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -o ios-webkit-debug-proxy.zip`
-    * `curl -L https://ftp.pcre.org/pub/pcre/pcre-8.43.zip -o pcre.zip`
+    * `curl -L https://sourceforge.net/projects/pcre/files/pcre/8.43/pcre-8.43.zip/download -o pcre.zip`
 
 11. Extract the projects
     * `unzip openssl.zip`
@@ -63,7 +63,7 @@ How to 'create' a x86 Terminal: https://osxdaily.com/2020/11/18/how-run-homebrew
     * `make install -j4`
 
 16. Go to **openssl** folder
-    * `cd ~/build_ios_proxy/openssl-OpenSSL_1_1_1`
+    * `cd ~/build_ios_proxy/openssl-openssl-3.0.11`
 
 17. Build library
     * `./config --prefix=$HOME/build_ios_proxy/install_folder no-idea no-mdc2 no-rc5 shared`
@@ -149,21 +149,21 @@ How to 'create' a x86 Terminal: https://osxdaily.com/2020/11/18/how-run-homebrew
 
 26. Copy **ios_webkit_debug_proxy** generated in **src** folder, and get all other necessary **dylib**
     * `cp ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/src/ios_webkit_debug_proxy .`
-    * `cp ~/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib .`
+    * `cp ~/build_ios_proxy/install_folder/lib/libcrypto.3.dylib .`
+    * `cp ~/build_ios_proxy/install_folder/lib/libssl.3.dylib .`
     * `cp ~/build_ios_proxy/install_folder/lib/libimobiledevice-1.0.6.dylib .`
     * `cp ~/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib .`
-    * `cp ~/build_ios_proxy/install_folder/lib/libssl.1.1.dylib .`
     * `cp ~/build_ios_proxy/install_folder/lib/libusbmuxd-2.0.6.dylib .`
 
 27. Change binary files to look for dependencies on the executable's folder
     * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libimobiledevice-1.0.6.dylib @executable_path/libimobiledevice-1.0.6.dylib ios_webkit_debug_proxy`
     * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libusbmuxd-2.0.6.dylib @executable_path/libusbmuxd-2.0.6.dylib ios_webkit_debug_proxy`
     * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib @executable_path/libplist-2.0.3.dylib ios_webkit_debug_proxy`
-    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libssl.1.1.dylib @executable_path/libssl.1.1.dylib ios_webkit_debug_proxy`
-    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib @executable_path/libcrypto.1.1.dylib ios_webkit_debug_proxy`
-    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libssl.1.1.dylib @executable_path/libssl.1.1.dylib libimobiledevice-1.0.6.dylib`
-    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib @executable_path/libcrypto.1.1.dylib libimobiledevice-1.0.6.dylib`
+    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libssl.3.dylib @executable_path/libssl.3.dylib ios_webkit_debug_proxy`
+    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.3.dylib @executable_path/libcrypto.3.dylib ios_webkit_debug_proxy`
+    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libssl.3.dylib @executable_path/libssl.3.dylib libimobiledevice-1.0.6.dylib`
+    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.3.dylib @executable_path/libcrypto.3.dylib libimobiledevice-1.0.6.dylib`
     * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libusbmuxd-2.0.6.dylib @executable_path/libusbmuxd-2.0.6.dylib libimobiledevice-1.0.6.dylib`
     * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib @executable_path/libplist-2.0.3.dylib libimobiledevice-1.0.6.dylib`
-    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib @executable_path/libcrypto.1.1.dylib libssl.1.1.dylib`
+    * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.3.dylib @executable_path/libcrypto.3.dylib libssl.3.dylib`
     * `install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib @executable_path/libplist-2.0.3.dylib libusbmuxd-2.0.6.dylib`
