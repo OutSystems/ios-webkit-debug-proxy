@@ -53,12 +53,12 @@ steps:
   inputs:
       script: |
           cd ~/build_ios_proxy
-          curl -L https://github.com/openssl/openssl/archive/openssl-3.0.11.zip -o openssl.zip
           curl -L https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -o libplist.zip
           curl -L https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -o libusbmuxd.zip
+          curl -L https://github.com/openssl/openssl/archive/openssl-3.0.11.zip -o openssl.zip
           curl -L https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -o libimobiledevice.zip
-          curl -L https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -o ios-webkit-debug-proxy.zip
           curl -L https://altushost-swe.dl.sourceforge.net/project/pcre/pcre/8.43/pcre-8.43.zip -o pcre.zip
+          curl -L https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -o ios-webkit-debug-proxy.zip
           ls -l
 ###################
 # Extract projects
@@ -68,12 +68,12 @@ steps:
   inputs:
       script: |
           cd ~/build_ios_proxy
-          unzip openssl.zip
           unzip libplist.zip
           unzip libusbmuxd.zip
+          unzip openssl.zip
           unzip libimobiledevice.zip
-          unzip ios-webkit-debug-proxy.zip
           unzip pcre.zip
+          unzip ios-webkit-debug-proxy.zip
           pwd
           ls -l
 ###################
@@ -137,10 +137,10 @@ steps:
       script: |
           cd ~/build_ios_proxy/bundle 
           cp ~/build_ios_proxy/ios-webkit-debug-proxy-outsystems/src/ios_webkit_debug_proxy .
-          cp ~/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib .
+          cp ~/build_ios_proxy/install_folder/lib/libcrypto.3.dylib .
           cp ~/build_ios_proxy/install_folder/lib/libimobiledevice-1.0.6.dylib .
           cp ~/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib .
-          cp ~/build_ios_proxy/install_folder/lib/libssl.1.1.dylib .
+          cp ~/build_ios_proxy/install_folder/lib/libssl.3.dylib .
           cp ~/build_ios_proxy/install_folder/lib/libusbmuxd-2.0.6.dylib .
 ###################
 # Change binary files to look for dependencies on the executable's folde
@@ -153,13 +153,13 @@ steps:
           install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libimobiledevice-1.0.6.dylib @executable_path/libimobiledevice-1.0.6.dylib ios_webkit_debug_proxy
           install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libusbmuxd-2.0.6.dylib @executable_path/libusbmuxd-2.0.6.dylib ios_webkit_debug_proxy
           install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib @executable_path/libplist-2.0.3.dylib ios_webkit_debug_proxy
-          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libssl.1.1.dylib @executable_path/libssl.1.1.dylib ios_webkit_debug_proxy
-          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib @executable_path/libcrypto.1.1.dylib ios_webkit_debug_proxy
-          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libssl.1.1.dylib @executable_path/libssl.1.1.dylib libimobiledevice-1.0.6.dylib
-          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib @executable_path/libcrypto.1.1.dylib libimobiledevice-1.0.6.dylib
+          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libssl.3.dylib @executable_path/libssl.3.dylib ios_webkit_debug_proxy
+          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.3.dylib @executable_path/libcrypto.3.dylib ios_webkit_debug_proxy
+          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libssl.3.dylib @executable_path/libssl.3.dylib libimobiledevice-1.0.6.dylib
+          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.3.dylib @executable_path/libcrypto.3.dylib libimobiledevice-1.0.6.dylib
           install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libusbmuxd-2.0.6.dylib @executable_path/libusbmuxd-2.0.6.dylib libimobiledevice-1.0.6.dylib
           install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib @executable_path/libplist-2.0.3.dylib libimobiledevice-1.0.6.dylib
-          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.1.1.dylib @executable_path/libcrypto.1.1.dylib libssl.1.1.dylib
+          install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libcrypto.3.dylib @executable_path/libcrypto.3.dylib libssl.3.dylib
           install_name_tool -change $HOME/build_ios_proxy/install_folder/lib/libplist-2.0.3.dylib @executable_path/libplist-2.0.3.dylib libusbmuxd-2.0.6.dylib
 ###################
 # Archive the necessary files to export as an artifact
