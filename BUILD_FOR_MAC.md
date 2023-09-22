@@ -38,7 +38,7 @@ How to 'create' a x86 Terminal: https://osxdaily.com/2020/11/18/how-run-homebrew
     * `curl -L https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -o libusbmuxd.zip`
     * `curl -L https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -o libimobiledevice.zip`
     * `curl -L https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -o ios-webkit-debug-proxy.zip`
-    * `curl -L https://altushost-swe.dl.sourceforge.net/project/pcre/pcre/8.43/pcre-8.43.zip -o pcre.zip`
+    * `curl -L https://sourceforge.net/projects/pcre/files/pcre/8.43/pcre-8.43.zip/download -o pcre.zip`
 
 11. Extract the projects
     * `unzip openssl.zip`
