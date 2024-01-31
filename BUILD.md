@@ -22,7 +22,7 @@
     * `cd /home/`
 
 10. Download projects
-    * `wget https://github.com/openssl/openssl/archive/openssl-3.0.12.zip -O openssl.zip`
+    * `wget https://github.com/openssl/openssl/archive/openssl-3.0.13.zip -O openssl.zip`
     * `wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O libplist.zip`
     * `wget https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -O libusbmuxd.zip`
     * `wget https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -O libimobiledevice.zip`
@@ -54,7 +54,7 @@
     * `make install -j4`
 
 16. Go to **openssl** folder
-    * `cd /home/openssl-openssl-3.0.12`
+    * `cd /home/openssl-openssl-3.0.13`
 
 17. Build library
     * `./Configure --prefix=/mingw32 no-idea no-mdc2 no-rc5 shared mingw`
@@ -138,8 +138,8 @@
 
 25. Use **exe** generated in **.libs** folder, and get all other necessary **dll’s**
     * `C:\msys64\home\ios-webkit-debug-proxy-outsystems\src\.libs\ios_webkit_debug_proxy.exe`
-    * `C:\msys64\home\openssl-openssl-3.0.12\libcrypto-3.dll`
-    * `C:\msys64\home\openssl-openssl-3.0.12\libssl-3.dll`
+    * `C:\msys64\home\openssl-openssl-3.0.13\libcrypto-3.dll`
+    * `C:\msys64\home\openssl-openssl-3.0.13\libssl-3.dll`
     * `C:\msys64\home\libimobiledevice-1.3.0\src\.libs\libimobiledevice-1.0.dll`
     * `C:\msys64\home\pcre-8.43\.libs\libpcre-1.dll`
     * `C:\msys64\home\pcre-8.43\.libs\libpcreposix-0.dll`
