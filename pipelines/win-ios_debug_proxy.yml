@@ -47,7 +47,7 @@ steps:
       Set-Location C:\msys64\Location
       $(MINGW32) 'wget https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -O libplist.zip'
       $(MINGW32) 'wget https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -O libusbmuxd.zip'
-      $(MINGW32) 'wget https://github.com/openssl/openssl/archive/openssl-3.0.13.zip -O openssl.zip'
+      $(MINGW32) 'wget https://github.com/openssl/openssl/archive/openssl-3.0.14.zip -O openssl.zip'
       $(MINGW32) 'wget https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -O libimobiledevice.zip'
       $(MINGW32) 'wget https://sourceforge.net/projects/pcre/files/pcre/8.43/pcre-8.43.zip/download -O pcre.zip'
       $(MINGW32) 'wget https://github.com/OutSystems/ios-webkit-debug-proxy/archive/outsystems.zip -O ios-webkit-debug-proxy.zip'
@@ -85,7 +85,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Set-Location C:\msys64\Location\openssl-openssl-3.0.13\
+      Set-Location C:\msys64\Location\openssl-openssl-3.0.14\
       $(MINGW32) './Configure --prefix=/mingw32 no-idea no-mdc2 no-rc5 shared mingw'
       $(MINGW32) 'make -j4'
       $(MINGW32) 'make install_sw -j4'
@@ -127,7 +127,7 @@ steps:
       (Get-ChildItem libplist-2.0.dll).fullname
       Set-Location C:\msys64\Location\libusbmuxd-2.0.2\src\.libs\
       (Get-ChildItem libusbmuxd-2.0.dll).fullname
-      Set-Location C:\msys64\Location\openssl-openssl-3.0.13\
+      Set-Location C:\msys64\Location\openssl-openssl-3.0.14\
       (Get-ChildItem libcrypto-3.dll).fullname
       (Get-ChildItem libssl-3.dll).fullname
       Set-Location C:\msys64\Location\libimobiledevice-1.3.0\src\.libs\
@@ -152,8 +152,8 @@ steps:
       mkdir C:\msys64\bundle
       Copy-Item "C:\msys64\Location\libplist-2.2.0\src\.libs\libplist-2.0.dll" -Destination "C:\msys64\bundle"
       Copy-Item "C:\msys64\Location\libusbmuxd-2.0.2\src\.libs\libusbmuxd-2.0.dll" -Destination "C:\msys64\bundle"
-      Copy-Item "C:\msys64\Location\openssl-openssl-3.0.13\libcrypto-3.dll" -Destination "C:\msys64\bundle"
-      Copy-Item "C:\msys64\Location\openssl-openssl-3.0.13\libssl-3.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\Location\openssl-openssl-3.0.14\libcrypto-3.dll" -Destination "C:\msys64\bundle"
+      Copy-Item "C:\msys64\Location\openssl-openssl-3.0.14\libssl-3.dll" -Destination "C:\msys64\bundle"
       Copy-Item "C:\msys64\Location\libimobiledevice-1.3.0\src\.libs\libimobiledevice-1.0.dll" -Destination "C:\msys64\bundle"
       Copy-Item "C:\msys64\Location\pcre-8.43\.libs\libpcre-1.dll" -Destination "C:\msys64\bundle"
       Copy-Item "C:\msys64\Location\pcre-8.43\.libs\libpcreposix-0.dll" -Destination "C:\msys64\bundle"
