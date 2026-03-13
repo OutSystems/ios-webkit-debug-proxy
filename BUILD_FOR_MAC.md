@@ -33,7 +33,7 @@ How to 'create' a x86 Terminal: https://osxdaily.com/2020/11/18/how-run-homebrew
     * `export PKG_CONFIG_PATH="$HOME/build_ios_proxy/install_folder/lib/pkgconfig"`
 
 10. Download the projects
-    * `curl -L https://github.com/openssl/openssl/archive/openssl-3.0.17.zip -o openssl.zip`
+    * `curl -L https://github.com/openssl/openssl/archive/openssl-3.0.19.zip -o openssl.zip`
     * `curl -L https://github.com/libimobiledevice/libplist/archive/2.2.0.zip -o libplist.zip`
     * `curl -L https://github.com/libimobiledevice/libusbmuxd/archive/2.0.2.zip -o libusbmuxd.zip`
     * `curl -L https://github.com/libimobiledevice/libimobiledevice/archive/1.3.0.zip -o libimobiledevice.zip`
@@ -63,7 +63,7 @@ How to 'create' a x86 Terminal: https://osxdaily.com/2020/11/18/how-run-homebrew
     * `make install -j4`
 
 16. Go to **openssl** folder
-    * `cd ~/build_ios_proxy/openssl-openssl-3.0.17`
+    * `cd ~/build_ios_proxy/openssl-openssl-3.0.19`
 
 17. Build library
     * `./config --prefix=$HOME/build_ios_proxy/install_folder no-idea no-mdc2 no-rc5 shared`
