@@ -30,6 +30,7 @@
 #include <libimobiledevice/lockdown.h>
 
 #include "char_buffer.h"
+#include "idevice_ext.h"
 #include "webinspector.h"
 
 
@@ -52,48 +53,20 @@ struct wi_private {
 //
 // CONNECT
 //
-
-// based on latest libimobiledevice/src/idevice.h
-struct idevice_connection_private {
-  idevice_t device;
-  enum idevice_connection_type type;
-  void *data;
-  void *ssl_data;
-};
-
-struct ssl_data_private {
-	SSL *session;
-	SSL_CTX *ctx;
-};
-typedef struct ssl_data_private *ssl_data_t;
-
-wi_status idevice_connection_get_ssl_session(idevice_connection_t connection,
-    SSL **to_session) {
-  if (!connection || !to_session) {
-    return WI_ERROR;
+static const char *lockdownd_err_to_string(int ldret) {
+  switch (ldret) {
+    case LOCKDOWN_E_PASSWORD_PROTECTED:
+      return "Please enter the passcode on the device, then try again.";
+    case LOCKDOWN_E_PAIRING_DIALOG_RESPONSE_PENDING:
+      return "Please accept the trust dialog on the screen of device, then try again.";
+    case LOCKDOWN_E_USER_DENIED_PAIRING:
+      return "User denied the trust dialog. Re-plug device and try again.";
+    case LOCKDOWN_E_INVALID_CONF:
+    case LOCKDOWN_E_INVALID_HOST_ID:
+      return "Device is not paired with this host. Re-plug device and try again.";
+    default:
+      return "Could not connect to lockdownd, error code: %d.";
   }
-
-  idevice_connection_private *c = (
-      (sizeof(*connection) == sizeof(idevice_connection_private)) ?
-      (idevice_connection_private *) connection : NULL);
-
-  if (!c || c->data <= 0) {
-    perror("Invalid idevice_connection struct. Please verify that "
-        __FILE__ "'s idevice_connection_private matches your version of"
-        " libimbiledevice/src/idevice.h");
-    return WI_ERROR;
-  }
-
-  ssl_data_t sd = (ssl_data_t)c->ssl_data;
-  if (!sd || !sd->session) {
-    perror("Invalid ssl_data struct. Make sure libimobiledevice was compiled"
-        " with openssl. Otherwise please verify that " __FILE__ "'s ssl_data"
-        " matches your version of libimbiledevice/src/idevice.h");
-    return WI_ERROR;
-  }
-
-  *to_session = sd->session;
-  return WI_SUCCESS;
 }
 
 int wi_connect(const char *device_id, char **to_device_id,
@@ -119,7 +92,7 @@ int wi_connect(const char *device_id, char **to_device_id,
   lockdownd_error_t ldret;
   if (LOCKDOWN_E_SUCCESS != (ldret = lockdownd_client_new_with_handshake(
         phone, &client, "ios_webkit_debug_proxy"))) {
-    fprintf(stderr, "Could not connect to lockdownd, error code %d. Exiting.\n", ldret);
+    fprintf(stderr, "%s\n", lockdownd_err_to_string(ldret));
     goto leave_cleanup;
   }
 
@@ -154,9 +127,9 @@ int wi_connect(const char *device_id, char **to_device_id,
   }
 
   // start webinspector, get port
-  if (lockdownd_start_service(client, "com.apple.webinspector", &service) ||
-      !service->port) {
-    perror("Could not start com.apple.webinspector!");
+  if (LOCKDOWN_E_SUCCESS != (ldret = lockdownd_start_service(client,
+          "com.apple.webinspector", &service)) || !service || !service->port) {
+    fprintf(stderr, "Could not start com.apple.webinspector! Error code: %d\n", ldret);
     goto leave_cleanup;
   }
 
@@ -164,16 +137,6 @@ int wi_connect(const char *device_id, char **to_device_id,
   if (idevice_connect(phone, service->port, &connection)) {
     perror("idevice_connect failed!");
     goto leave_cleanup;
-  }
-
-  // enable ssl
-  if (service->ssl_enabled == 1) {
-    if (!to_ssl_session || idevice_connection_enable_ssl(connection) ||
-        idevice_connection_get_ssl_session(connection, &ssl_session)) {
-      perror("ssl connection failed!");
-      goto leave_cleanup;
-    }
-    *to_ssl_session = ssl_session;
   }
 
   if (client) {
@@ -186,6 +149,16 @@ int wi_connect(const char *device_id, char **to_device_id,
   if (idevice_connection_get_fd(connection, &fd)) {
     perror("Unable to get connection file descriptor.");
     goto leave_cleanup;
+  }
+
+  // enable ssl
+  if (service->ssl_enabled == 1) {
+    int ssl_ret = 0;
+    if (!to_ssl_session || (ssl_ret = idevice_ext_connection_enable_ssl(device_id, fd, &ssl_session))) {
+      fprintf(stderr, "SSL connection failed! Error code: %d\n", ssl_ret);
+      goto leave_cleanup;
+    }
+    *to_ssl_session = ssl_session;
   }
 
   if (recv_timeout < 0) {

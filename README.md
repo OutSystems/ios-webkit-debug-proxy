@@ -10,19 +10,22 @@ If you wish to know how to build this repository, follow [these instructions](BU
 
 iOS WebKit Debug Proxy works on Linux, MacOS & Windows.
 
-On a MacOS, it's easiest to install with [homebrew](http://brew.sh/):
+### MacOS
+
+It's easiest to install with [homebrew](http://brew.sh/):
 
 ```console
 brew install ios-webkit-debug-proxy
 ```
-
-On Windows, it's easiest to install with [scoop](http://scoop.sh/):
+### Windows
+It's easiest to install with [scoop](http://scoop.sh/):
 ```
 scoop bucket add extras
 scoop install ios-webkit-debug-proxy
 ```
+Note: you also need the latest version of [iTunes](https://www.apple.com/il/itunes/download/) installed.
 
-On Linux:
+### Linux
 
 Install dependencies available in apt repository:
 ```console
@@ -30,7 +33,7 @@ sudo apt-get install autoconf automake libusb-dev libusb-1.0-0-dev libplist-dev 
 ```
 
 Build and install dependencies that require more recent versions:
-- [libmobiledevice](https://github.com/libimobiledevice/libimobiledevice)
+- [libimobiledevice](https://github.com/libimobiledevice/libimobiledevice)
 - [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd)
 - [usbmuxd](https://github.com/libimobiledevice/usbmuxd)
 - [libplist](https://github.com/libimobiledevice/libplist)
@@ -84,12 +87,10 @@ ios_webkit_debug_proxy can be used with many tools such as Chrome DevTools and S
 
 #### Chrome Devtools
 
-To use Chrome DevTools it's the recommendation to use the [RemoteDebug/remotedebug-ios-webkit-adapter](https://github.com/RemoteDebug/remotedebug-ios-webkit-adapter) project, which has instructions on how to setup Chrome to remote debug iOS devices, much similar to Android debugging.
-
-The reason is that in recent versions of Chrome and Safari there're major discrepancies between [Chrome Remote Debugging Protocol](https://developer.chrome.com/devtools/docs/debugger-protocol) and [Webkit Inspector Protocol](https://github.com/WebKit/webkit/tree/master/Source/JavaScriptCore/inspector/protocol), which means that newer versions of Chrome DevTools aren't compatible with Safari.
+In recent versions of Chrome and Safari there're major discrepancies between [Chrome Remote Debugging Protocol](https://developer.chrome.com/devtools/docs/debugger-protocol) and [Webkit Inspector Protocol](https://github.com/WebKit/webkit/tree/master/Source/JavaScriptCore/inspector/protocol), which means that newer versions of Chrome DevTools aren't compatible with Safari.
 
 #### Safari Web Inspector
-You can use Safari Web Inspector extracted from Webkit sources, e.g. [artygus/webkit-webinspector](https://github.com/artygus/webkit-webinspector).
+You can use Safari Web Inspector extracted from Webkit sources, e.g. [artygus/webkit-webinspector](https://github.com/artygus/webkit-webinspector) or [HimbeersaftLP/ios-safari-remote-debug-kit](https://github.com/HimbeersaftLP/ios-safari-remote-debug-kit).
 
 #### Firefox DevTools via Valence
 Another option is [mozilla/valence](https://github.com/mozilla/valence) which enables Firefox DevTools to be used with iOS.
@@ -211,6 +212,15 @@ Make sure you're using latest version of ios-webkit-debug-proxy
   - Check that webinspector switch is enabled (Settings -> Safari -> Advanced -> Web Inspector)
   - Most likely simulator's web inspector daemon listens on ipv6 interface, check that you have `::1 localhost` line in `/etc/hosts`
 
+##### Building under Rosetta (OS X)
+
+libimobildevice formulae [depends on](https://github.com/Homebrew/homebrew-core/blob/d6c416caf0622f2aac47742bca679c3510d0b1d9/Formula/libimobiledevice.rb#L30) openssl@1.1, which is key-only and requires the following env paths for the build
+
+```console
+export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+```
 
 ##### If no luck so far...
 Lastly, always try replugging in the USB cable.
